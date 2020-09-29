@@ -17,4 +17,6 @@ Route::get('/', function () {
 
 Route::get('/', 'LoginController@index');
 Route::get('/dashboard', 'DashboardController@index');
+//Karyawan Routes
 Route::get('/karyawan', 'KaryawanController@index');
+Route::get('/karyawan/tambah', 'KaryawanController@create');

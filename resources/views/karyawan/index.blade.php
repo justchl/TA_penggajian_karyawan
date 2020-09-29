@@ -8,7 +8,15 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Data Karyawan</h6>
+            <div class="row">
+                <div class="col-lg-6 col-xs-12">
+                    <h6 class="m-0 font-weight-bold text-primary">Data Karyawan</h6>
+                </div>
+
+                <div class="col-lg-6 col-xs-12 text-right">
+                <a href="{{ url('karyawan/tambah') }}"><i class="fa fa-plus"></i> Tambah Data</a>
+                </div>
+            </div>
         </div>
         <div class="card-body">
             <div class="table-responsive">
