@@ -11,12 +11,18 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+// Login
 Route::get('/', 'LoginController@index');
+Route::post('/login', 'LoginController@login');
+Route::get('/logout', 'LoginController@logout');
+
+// Dashboard
 Route::get('/dashboard', 'DashboardController@index');
-//Karyawan Routes
+
+//User
+Route::get('/user', 'UserController@index');
+Route::get('/user/tambah', 'UserController@create');
+
+//Karyawan 
 Route::get('/karyawan', 'KaryawanController@index');
 Route::get('/karyawan/tambah', 'KaryawanController@create');

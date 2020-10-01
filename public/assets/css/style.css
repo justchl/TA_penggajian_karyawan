@@ -17,3 +17,15 @@
 .form-karyawan fieldset.gender-border legend{
     padding: 0 5px;
 }
+
+.form-karyawan .req-foto-wrap{
+    background: #f4f4f4;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.form-karyawan .req-foto-wrap ul{
+    margin: 0;
+    padding: 0 0 0 1rem;
+    display: block;
+}

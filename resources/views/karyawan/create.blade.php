@@ -2,8 +2,8 @@
 @section('title', 'Tambah Data Karyawan')
 @section('content')
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Data Karyawan</h1>
-    <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+    <h1 class="h3 mb-2 text-gray-800">Form Karyawan</h1>
+    <p class="mb-4">Silahkan isi data dibawah ini dengan benar.</p>
 
     <!-- Form Add Karyawan -->
     <form action="" class="form-karyawan">
@@ -15,7 +15,26 @@
                     </div>
 
                     <div class="card-body">
-                        
+                        <div class="text-center">
+                            <img src="{{ url('assets/img/ava.png') }}" class="mb-3" style="max-width:150px;">
+                        </div>
+
+                        <div class="form-group">
+                            <label>File Upload <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01">
+                                    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="req-foto-wrap">
+                            <ul>
+                                <li>Format file yang diperbolehkan yaitu .jpg, .jpeg</li>
+                                <li>Maksimal ukuran file yaitu 1 MB</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>

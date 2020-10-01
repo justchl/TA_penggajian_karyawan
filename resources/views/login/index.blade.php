@@ -32,15 +32,43 @@
                             <div class="text-center">
                                 <h1 class="h6 text-uppercase text-gray-900 mb-4">sistem informasi penggajian itekes bali</h1>
                             </div>
-                            <form class="user">
+                            @if(\Session::has('error_login'))
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{ Session::get('error_login') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            @endif
+
+                            @if(\Session::has('warning_login'))
+                                <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                    <span><i class="fa fa-info-circle mr-1"></i></span> {{ Session::get('warning_login') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            @endif
+                            <form class="user" action="{{ url('/login') }}" method="post" autocomplete="off">
+                                {{ csrf_field() }}
                                 <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Username">
+                                    <input type="text" name="username" class="form-control form-control-user {{ $errors->has('username') ? 'is-invalid' : '' }}" placeholder="Username" value="{{ old('username') }}">
+                                    @if($errors->has('username'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('username') }}
+                                        </div>
+                                    @endif
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                                    <input type="password" name="password" class="form-control form-control-user {{ $errors->has('password') ? 'is-invalid' : '' }}" placeholder="Password" value="{{ old('password') }}">
+                                    @if($errors->has('password'))
+                                        <div class="invalid-feedback">
+                                            {{ $errors->first('password') }}
+                                        </div>
+                                    @endif
                                 </div>
-                                <a href="{{ url('/dashboard') }}" class="btn btn-primary btn-user btn-block">Login</a>
+                                <button type="submit" class="btn btn-primary btn-user btn-block">login</button>
                             </form>
                         </div>
                     </div>
@@ -49,15 +77,14 @@
         </div>
     </div>
 
-  <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{ url('assets/vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 
-  <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="{{ url('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
 
-  <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin-2.min.js"></script>
-
+    <!-- Custom scripts for all pages-->
+    <script src="{{ url('assets/js/sb-admin-2.min.js') }}"></script>
 </body>
 </html>
