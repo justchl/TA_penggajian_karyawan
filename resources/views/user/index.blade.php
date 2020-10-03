@@ -6,6 +6,15 @@
     <p class="mb-4">Berikut list data user yang terdaftar.</p>
 
     <!-- DataTales Example -->
+    @if(\Session::has('msg_success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span class="mr-1"><i class="fa fa-check-circle"></i></span> {{ Session::get('msg_success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="row">
@@ -20,7 +29,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" id="dataTable">
+                <table class="table table-hover table-bordered" id="dataTable">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -41,10 +50,10 @@
                                 <td>{{ $row->username }}</td>
                                 <td>{{ $row->hak_akses }}</td>
                                 @if ($row->status == 1)
-                                    <td><span class="badge badge-fill badge-success">Aktif</span></td>
+                                    <td><span class="badge badge-fill badge-success">Aktif <i class="fa fa-check-circle ml-1"></i></span></td>
                                 @endif
                                 @if ($row->status == 0)
-                                    <td><span class="badge badge-fill badge-danger">Nonaktif</span></td>
+                                    <td><span class="badge badge-fill badge-danger">Nonaktif <i class="fa fa-times-circle ml-1"></i></span></td>
                                 @endif
                                 <td>
                                     <a href="/user/edit/{{ $row->id_user }}" class="btn btn-primary">

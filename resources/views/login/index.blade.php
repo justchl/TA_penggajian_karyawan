@@ -52,7 +52,7 @@
                             <form class="user" action="{{ url('/login') }}" method="post" autocomplete="off">
                                 {{ csrf_field() }}
                                 <div class="form-group">
-                                    <input type="text" name="username" class="form-control form-control-user {{ $errors->has('username') ? 'is-invalid' : '' }}" placeholder="Username" value="{{ old('username') }}">
+                                    <input type="text" name="username" class="form-control form-control-user {{ $errors->has('username') ? 'is-invalid' : '' }}" placeholder="Username">
                                     @if($errors->has('username'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('username') }}
@@ -61,7 +61,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <input type="password" name="password" class="form-control form-control-user {{ $errors->has('password') ? 'is-invalid' : '' }}" placeholder="Password" value="{{ old('password') }}">
+                                    <input type="password" name="password" class="form-control form-control-user {{ $errors->has('password') ? 'is-invalid' : '' }}" placeholder="Password">
                                     @if($errors->has('password'))
                                         <div class="invalid-feedback">
                                             {{ $errors->first('password') }}

@@ -23,24 +23,24 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
+                            <th>NIK</th>
+                            <th>Nama</th>
+                            <th>Foto</th>
+                            <th>TTL</th>
+                            <th>Jenis Kelamin</th>
+                            <th>Agama</th>
+                            <th>Jabatan</th>
+                            <th>Pendidikan</th>
+                            <th>Telp</th>
+                            <th>Status Pernikahan</th>
+                            <th>Status Kerja</th>
+                            <th>Alamat</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr>
-                            <td>Tiger Nixon</td>
-                            <td>System Architect</td>
-                            <td>Edinburgh</td>
-                            <td>61</td>
-                            <td>2011/04/25</td>
-                            <td>$320,800</td>
-                        </tr>
+                        
                     </tbody>
                 </table>
             </div>
