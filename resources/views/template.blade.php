@@ -18,6 +18,8 @@
     <link href="{{ url('assets/css/style.css') }}" rel="stylesheet">
     <!-- Custom styles for datatable -->
     <link href="{{ url('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+    <!-- Custom styles for datepicker -->
+    <link href="{{ url('assets/vendor/datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
 </head>
 <body id="page-top">
     <!-- Page Wrapper -->
@@ -215,6 +217,7 @@
 
 <!-- Core plugin JavaScript-->
 <script src="{{ url('assets/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+<script src="{{ url('assets/vendor/datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 
 <!-- Custom scripts for all pages-->
 <script src="{{ url('assets/js/sb-admin-2.min.js') }}"></script>
@@ -225,5 +228,6 @@
 
 <!-- Page level custom scripts -->
 <script src="{{ url('assets/js/demo/datatables-demo.js') }}"></script>
+@yield('file_upload.js');
 </body>
 </html>

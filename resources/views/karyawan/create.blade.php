@@ -5,8 +5,18 @@
     <h1 class="h3 mb-2 text-gray-800">Form Karyawan</h1>
     <p class="mb-4">Silahkan isi data dibawah ini dengan benar.</p>
 
+    @if(\Session::has('msg_success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span class="mr-1"><i class="fa fa-check-circle"></i></span> {{ Session::get('msg_success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
     <!-- Form Add Karyawan -->
-    <form action="" class="form-karyawan">
+    <form action="/karyawan/post" class="form-karyawan" method="post" enctype="multipart/form-data">
+        {{ csrf_field() }}
         <div class="row">
             <div class="col-lg-4 col-md-6 col-xs-12">
                 <div class="card shadow mb-4">
@@ -23,10 +33,15 @@
                             <label>File Upload <span class="text-danger">*</span></label>
                             <div class="input-group">
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputGroupFile01">
+                                    <input type="file" name="foto" class="custom-file-input {{ $errors->has('file') ? 'is-invalid' : '' }}" id="inputGroupFile01">
                                     <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                 </div>
                             </div>
+                            @if($errors->has('file'))
+                                <small class="text-danger">
+                                    {{ $errors->first('file') }}
+                                </small>
+                            @endif
                         </div>
 
                         <div class="req-foto-wrap">
@@ -48,29 +63,44 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label>NIK <span class="text-danger">*</span></label>
-                            <input type="number" class="form-control" name="">
+                            <input type="number" class="form-control {{ $errors->has('nik') ? 'is-invalid' : '' }}" name="nik">
+                            @if($errors->has('nik'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('nik') }}
+                                </div>
+                            @endif
                         </div>
 
                         <div class="form-group row">
                             <div class="col-lg-6 col-xs-12">
                                 <label>Nama Lengkap <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" name="">
+                                <input type="text" class="form-control {{ $errors->has('nama') ? 'is-invalid' : '' }}" name="nama">
+                                @if($errors->has('nama'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('nama') }}
+                                    </div>
+                                @endif
                             </div>
 
                             <div class="col-lg-6 col-xs-12">
                                 <label>Tempat / Tanggal Lahir <span class="text-danger">*</span></label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend date-born">
-                                        <input type="text" class="form-control" placeholder="Tempat">
+                                        <input type="text" class="form-control {{ $errors->has('tempat') ? 'is-invalid' : '' }}" placeholder="Tempat" name="tempat">
                                     </div>
-                                    <input type="date" class="form-control" placeholder="Tanggal Lahir">
+                                    <input type="text" id="datepicker" name="tgl_lahir" class="form-control {{ $errors->has('tgl_lahir') ? 'is-invalid' : '' }}" placeholder="Tanggal Lahir">
+                                    @if($errors->has('tempat') && $errors->has('tgl_lahir'))
+                                        <div class="invalid-feedback">
+                                            The tempat & tanggal lahir is required
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <fieldset class="gender-border">
-                                <legend>Jenis Kelamin</legend>
+                            <fieldset class="gender-border {{ $errors->has('jenis_kelamin') ? 'border-danger' : '' }}">
+                                <legend>Jenis Kelamin <span class="text-danger">*</span></legend>
                                 
                                 <div class="row">
                                     <div class="col-lg-6 col-xs-12">
@@ -88,69 +118,112 @@
                                     </div>
                                 </div>
                             </fieldset>
+                            @if($errors->has('jenis_kelamin'))
+                                <small class="text-danger">
+                                    {{ $errors->first('jenis_kelamin') }}
+                                </small>
+                            @endif
                         </div>
 
                         <div class="form-group row">
                             <div class="col-lg-6 col-xs-12">
-                                <label>Telp</label>
-                                <input type="number" class="form-control" name="">
+                                <label>Telp <span class="text-danger">*</span></label>
+                                <input type="number" class="form-control {{ $errors->has('telp') ? 'is-invalid' : '' }}" name="telp">
+                                @if($errors->has('telp'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('telp') }}
+                                    </div>
+                                @endif
                             </div>
 
                             <div class="col-lg-6 col-xs-12">
-                                <label>Jabatan</label>
-                                <select class="form-control" name="">
+                                <label>Jabatan <span class="text-danger">*</span></label>
+                                <select class="form-control {{ $errors->has('jabatan') ? 'is-invalid' : '' }}" name="jabatan">
                                     <option value="">Pilih Jabatan</option>
+                                    <option value="-">-</option>
                                 </select>
+                                @if($errors->has('jabatan'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('jabatan') }}
+                                    </div>
+                                @endif
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-lg-6 col-xs-12">
-                                <label>Pendidikan</label>
-                                <select class="form-control" name="">
+                                <label>Pendidikan <span class="text-danger">*</span></label>
+                                <select class="form-control {{ $errors->has('pendidikan') ? 'is-invalid' : '' }}" name="pendidikan">
                                     <option value="">Pilih Pendidikan</option>
-                                    <option value="">SD</option>
-                                    <option value="">SMP</option>
-                                    <option value="">SMA / Sederajat</option>
-                                    <option value="">Sarjana</option>
+                                    <option value="SD">SD</option>
+                                    <option value="SMP">SMP</option>
+                                    <option value="SMA / Sederajat">SMA / Sederajat</option>
+                                    <option value="Sarjana">Sarjana</option>
                                 </select>
+                                @if($errors->has('pendidikan'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('pendidikan') }}
+                                    </div>
+                                @endif
                             </div>
 
                             <div class="col-lg-6 col-xs-12">
-                                <label>Agama</label>
-                                <select class="form-control" name="">
+                                <label>Agama <span class="text-danger">*</span></label>
+                                <select class="form-control {{ $errors->has('agama') ? 'is-invalid' : '' }}" name="agama">
                                     <option value="">Pilih Agama</option>
                                     <option value="Islam">Islam</option>
                                     <option value="Kristen">Kristen</option>
                                     <option value="Hindu">Hindu</option>
                                     <option value="Budha">Budha</option>
                                 </select>
+                                @if($errors->has('agama'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('agama') }}
+                                    </div>
+                                @endif
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <div class="col-lg-6 col-xs-12">
-                                <label>Status Pernikahan</label>
-                                <select class="form-control" name="">
+                                <label>Status Pernikahan <span class="text-danger">*</span></label>
+                                <select class="form-control {{ $errors->has('status_pernikahan') ? 'is-invalid' : '' }}" name="status_pernikahan">
                                     <option value="">Pilih Status</option>
                                     <option value="Belum Kawin">Belum Kawin</option>
                                     <option value="Kawin">Kawin</option>
                                     <option value="Cerai Hidup">Cerai Hidup</option>
                                     <option value="Cerai Mati">Cerai Mati</option>
                                 </select>
+                                @if($errors->has('status_pernikahan'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('status_pernikahan') }}
+                                    </div>
+                                @endif
                             </div>
 
                             <div class="col-lg-6 col-xs-12">
-                                <label>Status Kerja</label>
-                                <select class="form-control" name="">
+                                <label>Status Kerja <span class="text-danger">*</span></label>
+                                <select class="form-control {{ $errors->has('status_kerja') ? 'is-invalid' : '' }}" name="status_kerja">
                                     <option value="">Pilih Status</option>
+                                    <option value="Tetap">Tetap</option>
+                                    <option value="Kontrak">Kontrak</option>
                                 </select>
+                                @if($errors->has('status_kerja'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('status_kerja') }}
+                                    </div>
+                                @endif
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label>Alamat</label>
-                            <textarea class="form-control" rows="3" name=""></textarea>
+                            <label>Alamat <span class="text-danger">*</span></label>
+                            <textarea class="form-control {{ $errors->has('alamat') ? 'is-invalid' : '' }}" rows="3" name="alamat"></textarea>
+                            @if($errors->has('alamat'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('alamat') }}
+                                </div>
+                            @endif
                         </div>
                     </div>
 
@@ -161,4 +234,22 @@
             </div>
         </div>
     </form>
+@endsection
+
+@section('file_upload.js')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            //Init Datepicker
+            $('#datepicker').datepicker();
+
+            //Get file name
+            $('#inputGroupFile01').on('change',function(){
+                //get the file name
+                var fileName = $(this).val();
+                var cleanFileName = fileName.replace('C:\\fakepath\\', " ");
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(cleanFileName);
+            });
+        })
+    </script>
 @endsection

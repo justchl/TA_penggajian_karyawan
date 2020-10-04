@@ -26,6 +26,7 @@ class LoginController extends Controller
         
         if($data){
             if($username == $data->username && $password == $data->password){
+                Session::put('id_user', $data->id_user);
                 Session::put('nama_user', $data->nama_user);
                 Session::put('username', $data->username);
                 Session::put('level', $data->level_akses);
