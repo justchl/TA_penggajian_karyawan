@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\UserModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -14,9 +15,13 @@ class UserController extends Controller
                 ->select('tb_user.id_user', 'tb_user.nama_user', 'tb_user.username', 'tb_level.hak_akses', 'tb_user.status')
                 ->get();
 
-        return view('user/index', [
-            'user' => $user
-        ]);
+        if(!Session::get('status')){
+            return redirect('/')->with('warning_login', 'Silahkan login terlebih dahulu!');
+        }else{
+            return view('user/index', [
+                'user' => $user
+            ]);
+        }
     }
 
     public function create(){

@@ -50,7 +50,7 @@
                             <select class="form-control {{ $errors->has('level') ? 'is-invalid' : '' }}" name="level">
                                 <option value="">Pilih Level</option>
                                 @foreach ($level as $row)
-                                    <option value="{{ $row->id_level }}">{{ $row->hak_akses }}</option>
+                                    <option value="{{ $row->id_level }}" {{ $row->id_level == $user->level_akses ? 'selected' : '' }}>{{ $row->hak_akses }}</option>
                                 @endforeach
                             </select>
                             @if($errors->has('level'))

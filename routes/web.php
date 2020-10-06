@@ -34,3 +34,11 @@ Route::post('/karyawan/post', 'KaryawanController@store');
 Route::get('/karyawan/edit/{id}', 'KaryawanController@edit');
 Route::put('/karyawan/update/{id}', 'KaryawanController@update');
 Route::get('/karyawan/delete/{id}', 'KaryawanController@delete');
+
+//Tunjangan
+Route::get('/tunjangan', 'TunjanganController@index');
+Route::get('/tunjangan/tambah', 'TunjanganController@create');
+Route::post('/tunjangan/post', 'TunjanganController@store');
+Route::get('/tunjangan/edit/{id}', 'TunjanganController@edit');
+Route::put('/tunjangan/update/{id}', 'TunjanganController@update');
+Route::get('/tunjangan/delete/{id}', 'TunjanganController@delete');

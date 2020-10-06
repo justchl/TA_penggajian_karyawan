@@ -81,8 +81,8 @@
                 </a>
                 <div id="collapsePenggajian" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="#">Data Gaji</a>
-                        <a class="collapse-item" href="#">Data Tunjangan</a>
+                        <a class="collapse-item" href="{{ url('/gaji') }}">Data Gaji</a>
+                        <a class="collapse-item" href="{{ url('/tunjangan') }}">Data Tunjangan</a>
                     </div>
                 </div>
             </li>
@@ -229,5 +229,6 @@
 <!-- Page level custom scripts -->
 <script src="{{ url('assets/js/demo/datatables-demo.js') }}"></script>
 @yield('file_upload.js');
+@yield('format_currency.js');
 </body>
 </html>

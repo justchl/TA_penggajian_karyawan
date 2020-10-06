@@ -13,9 +13,13 @@ class KaryawanController extends Controller
     public function index(){
         $data = KaryawanModel::all();
 
-        return view('karyawan/index', [
-            'data' => $data
-        ]);
+        if(!Session::get('status')){
+            return redirect('/')->with('warning_login', 'Silahkan login terlebih dahulu!');
+        }else{
+            return view('karyawan/index', [
+                'data' => $data
+            ]);
+        }
     }
 
     public function create(){
@@ -118,7 +122,7 @@ class KaryawanController extends Controller
             $data->save();
 
         }else{
-            
+
             $data->NIK                  = $request->nik;
             $data->nama_karyawan        = $request->nama;
             $data->tempat_lahir         = $request->tempat;
