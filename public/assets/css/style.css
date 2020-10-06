@@ -1,4 +1,10 @@
 /* Form Karyawan */
+.form-karyawan .profile-img{
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+}
+
 .form-karyawan .date-born{
     width: 40%;
 }

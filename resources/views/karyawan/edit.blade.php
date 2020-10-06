@@ -1,9 +1,9 @@
 @extends('template')
-@section('title', 'Tambah Data Karyawan')
+@section('title', 'Edit Data Karyawan')
 @section('content')
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Form Karyawan</h1>
-    <p class="mb-4">Silahkan isi data dibawah ini dengan benar.</p>
+    <p class="mb-4">Pastikan data yang anda edit sudah benar.</p>
 
     @if(\Session::has('msg_success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -15,8 +15,9 @@
     @endif
 
     <!-- Form Add Karyawan -->
-    <form action="/karyawan/post" class="form-karyawan" method="post" enctype="multipart/form-data">
+    <form action="/karyawan/update/{{ $data->NIK }}" class="form-karyawan" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
+        {{ method_field('PUT') }}
         <div class="row">
             <div class="col-lg-4 col-md-6 col-xs-12">
                 <div class="card shadow mb-4">
@@ -26,7 +27,7 @@
 
                     <div class="card-body">
                         <div class="text-center">
-                            <img src="{{ url('assets/img/ava.png') }}" class="mb-3 profile-img">
+                            <img src="{{ url('assets/img/foto/'.$data->foto) }}" class="mb-3 profile-img">
                         </div>
 
                         <div class="form-group">
@@ -63,7 +64,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label>NIK <span class="text-danger">*</span></label>
-                            <input type="number" class="form-control {{ $errors->has('nik') ? 'is-invalid' : '' }}" name="nik">
+                            <input type="number" class="form-control {{ $errors->has('nik') ? 'is-invalid' : '' }}" name="nik" value="{{ $data->NIK }}">
                             @if($errors->has('nik'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('nik') }}
@@ -74,7 +75,7 @@
                         <div class="form-group row">
                             <div class="col-lg-6 col-xs-12">
                                 <label>Nama Lengkap <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control {{ $errors->has('nama') ? 'is-invalid' : '' }}" name="nama">
+                                <input type="text" class="form-control {{ $errors->has('nama') ? 'is-invalid' : '' }}" name="nama" value="{{ $data->nama_karyawan }}">
                                 @if($errors->has('nama'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('nama') }}
@@ -86,9 +87,9 @@
                                 <label>Tempat / Tanggal Lahir <span class="text-danger">*</span></label>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend date-born">
-                                        <input type="text" class="form-control {{ $errors->has('tempat') ? 'is-invalid' : '' }}" placeholder="Tempat" name="tempat">
+                                        <input type="text" class="form-control {{ $errors->has('tempat') ? 'is-invalid' : '' }}" placeholder="Tempat" name="tempat" value="{{ $data->tempat_lahir }}">
                                     </div>
-                                    <input type="text" id="datepicker" name="tgl_lahir" class="form-control {{ $errors->has('tgl_lahir') ? 'is-invalid' : '' }}" placeholder="Tanggal Lahir">
+                                    <input type="text" id="datepicker" name="tgl_lahir" class="form-control {{ $errors->has('tgl_lahir') ? 'is-invalid' : '' }}" placeholder="Tanggal Lahir" value="{{ date('d/m/Y', strtotime($data->tanggal_lahir)) }}">
                                     @if($errors->has('tempat') && $errors->has('tgl_lahir'))
                                         <div class="invalid-feedback">
                                             The tempat & tanggal lahir is required
@@ -105,14 +106,14 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-xs-12">
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input" id="customRadioLaki" name="jenis_kelamin" value="Laki-laki">
+                                            <input type="radio" class="custom-control-input" id="customRadioLaki" name="jenis_kelamin" value="Laki-laki" {{ $data->jenis_kelamin == 'Laki-laki' ? 'checked' : '' }}>
                                             <label class="custom-control-label" for="customRadioLaki">Laki-laki</label>
                                         </div>
                                     </div>
 
                                     <div class="col-lg-6 col-xs-12">
                                         <div class="custom-control custom-radio">
-                                            <input type="radio" class="custom-control-input" id="customRadioPerempuan" name="jenis_kelamin" value="Perempuan">
+                                            <input type="radio" class="custom-control-input" id="customRadioPerempuan" name="jenis_kelamin" value="Perempuan" {{ $data->jenis_kelamin == 'Perempuan' ? 'checked' : '' }}>
                                             <label class="custom-control-label" for="customRadioPerempuan">Perempuan</label>
                                         </div>
                                     </div>
@@ -128,7 +129,7 @@
                         <div class="form-group row">
                             <div class="col-lg-6 col-xs-12">
                                 <label>Telp <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control {{ $errors->has('telp') ? 'is-invalid' : '' }}" name="telp">
+                                <input type="number" class="form-control {{ $errors->has('telp') ? 'is-invalid' : '' }}" name="telp" value="{{ $data->no_telp }}">
                                 @if($errors->has('telp'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('telp') }}
@@ -140,7 +141,7 @@
                                 <label>Jabatan <span class="text-danger">*</span></label>
                                 <select class="form-control {{ $errors->has('jabatan') ? 'is-invalid' : '' }}" name="jabatan">
                                     <option value="">Pilih Jabatan</option>
-                                    <option value="Direktur">Direktur</option>
+                                    <option value="Direktur" {{ $data->jabatan == 'Direktur' ? 'selected' : '' }}>Direktur</option>
                                 </select>
                                 @if($errors->has('jabatan'))
                                     <div class="invalid-feedback">
@@ -155,13 +156,13 @@
                                 <label>Pendidikan <span class="text-danger">*</span></label>
                                 <select class="form-control {{ $errors->has('pendidikan') ? 'is-invalid' : '' }}" name="pendidikan">
                                     <option value="">Pilih Pendidikan</option>
-                                    <option value="SD">SD</option>
-                                    <option value="SMP">SMP</option>
-                                    <option value="SMA / Sederajat">SMA / Sederajat</option>
-                                    <option value="D3">D3</option>
-                                    <option value="D4 / S1">D4 / S1</option>
-                                    <option value="S2">S2</option>
-                                    <option value="S3">S3</option>
+                                    <option value="SD" {{ $data->pendidikan == 'SD' ? 'selected' : '' }}>SD</option>
+                                    <option value="SMP" {{ $data->pendidikan == 'SMP' ? 'selected' : '' }}>SMP</option>
+                                    <option value="SMA / Sederajat" {{ $data->pendidikan == 'SMA / Sederajat' ? 'selected' : '' }}>SMA / Sederajat</option>
+                                    <option value="D3" {{ $data->pendidikan == 'D3' ? 'selected' : '' }}>D3</option>
+                                    <option value="D4 / S1" {{ $data->pendidikan == 'D4 / S1' ? 'selected' : '' }}>D4 / S1</option>
+                                    <option value="S2" {{ $data->pendidikan == 'S2' ? 'selected' : '' }}>S2</option>
+                                    <option value="S3" {{ $data->pendidikan == 'S3' ? 'selected' : '' }}>S3</option>
                                 </select>
                                 @if($errors->has('pendidikan'))
                                     <div class="invalid-feedback">
@@ -174,10 +175,10 @@
                                 <label>Agama <span class="text-danger">*</span></label>
                                 <select class="form-control {{ $errors->has('agama') ? 'is-invalid' : '' }}" name="agama">
                                     <option value="">Pilih Agama</option>
-                                    <option value="Islam">Islam</option>
-                                    <option value="Kristen">Kristen</option>
-                                    <option value="Hindu">Hindu</option>
-                                    <option value="Budha">Budha</option>
+                                    <option value="Islam" {{ $data->agama == 'Islam' ? 'selected' : '' }}>Islam</option>
+                                    <option value="Kristen" {{ $data->agama == 'Kristen' ? 'selected' : '' }}>Kristen</option>
+                                    <option value="Hindu" {{ $data->agama == 'Hindu' ? 'selected' : '' }}>Hindu</option>
+                                    <option value="Budha" {{ $data->agama == 'Budha' ? 'selected' : '' }}>Budha</option>
                                 </select>
                                 @if($errors->has('agama'))
                                     <div class="invalid-feedback">
@@ -192,10 +193,10 @@
                                 <label>Status Pernikahan <span class="text-danger">*</span></label>
                                 <select class="form-control {{ $errors->has('status_pernikahan') ? 'is-invalid' : '' }}" name="status_pernikahan">
                                     <option value="">Pilih Status</option>
-                                    <option value="Belum Kawin">Belum Kawin</option>
-                                    <option value="Kawin">Kawin</option>
-                                    <option value="Cerai Hidup">Cerai Hidup</option>
-                                    <option value="Cerai Mati">Cerai Mati</option>
+                                    <option value="Belum Kawin" {{ $data->status_pernikahan == 'Belum Kawin' ? 'selected' : '' }}>Belum Kawin</option>
+                                    <option value="Kawin" {{ $data->status_pernikahan == 'Kawin' ? 'selected' : '' }}>Kawin</option>
+                                    <option value="Cerai Hidup" {{ $data->status_pernikahan == 'Cerai Hidup' ? 'selected' : '' }}>Cerai Hidup</option>
+                                    <option value="Cerai Mati" {{ $data->status_pernikahan == 'Cerai Mati' ? 'selected' : '' }}>Cerai Mati</option>
                                 </select>
                                 @if($errors->has('status_pernikahan'))
                                     <div class="invalid-feedback">
@@ -208,8 +209,8 @@
                                 <label>Status Kerja <span class="text-danger">*</span></label>
                                 <select class="form-control {{ $errors->has('status_kerja') ? 'is-invalid' : '' }}" name="status_kerja">
                                     <option value="">Pilih Status</option>
-                                    <option value="Tetap">Tetap</option>
-                                    <option value="Kontrak">Kontrak</option>
+                                    <option value="Tetap" {{ $data->status_kerja == 'Tetap' ? 'selected' : '' }}>Tetap</option>
+                                    <option value="Kontrak" {{ $data->status_kerja == 'Kontrak' ? 'selected' : '' }}>Kontrak</option>
                                 </select>
                                 @if($errors->has('status_kerja'))
                                     <div class="invalid-feedback">
@@ -221,7 +222,7 @@
 
                         <div class="form-group">
                             <label>Alamat <span class="text-danger">*</span></label>
-                            <textarea class="form-control {{ $errors->has('alamat') ? 'is-invalid' : '' }}" rows="3" name="alamat"></textarea>
+                            <textarea class="form-control {{ $errors->has('alamat') ? 'is-invalid' : '' }}" rows="3" name="alamat">{{ $data->alamat }}</textarea>
                             @if($errors->has('alamat'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('alamat') }}

@@ -70,7 +70,7 @@ class UserController extends Controller
         $user->level_akses  = $request->level;
         $user->save();
 
-        return redirect('/user')->with('msg_success', 'Data berhasil diupdate!');
+        return redirect('/user/edit/'.$id)->with('msg_success', 'Data berhasil diupdate!');
     }
 
     public function delete($id){
