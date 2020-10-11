@@ -62,6 +62,7 @@
                     </div>
 
                     <div class="card-footer text-right">
+                        <a href="/user" class="btn btn-secondary mr-1">Cancel</a>
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>

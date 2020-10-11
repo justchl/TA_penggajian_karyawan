@@ -42,3 +42,19 @@ Route::post('/tunjangan/post', 'TunjanganController@store');
 Route::get('/tunjangan/edit/{id}', 'TunjanganController@edit');
 Route::put('/tunjangan/update/{id}', 'TunjanganController@update');
 Route::get('/tunjangan/delete/{id}', 'TunjanganController@delete');
+
+//Absensi
+Route::get('/absensi', 'AbsensiController@index');
+Route::get('/absensi/tambah', 'AbsensiController@create');
+Route::post('/absensi/post', 'AbsensiController@store');
+Route::get('/absensi/edit/{id}', 'AbsensiController@edit');
+Route::put('/absensi/update/{id}', 'AbsensiController@update');
+Route::get('/absensi/delete/{id}', 'AbsensiController@delete');
+
+//Gaji
+Route::get('/gaji', 'GajiController@index');
+Route::get('/gaji/tambah', 'GajiController@create');
+Route::post('/gaji/post', 'GajiController@store');
+Route::get('/gaji/edit/{id}', 'GajiController@edit');
+Route::put('/gaji/update/{id}', 'GajiController@update');
+Route::get('/gaji/delete/{id}', 'GajiController@delete');

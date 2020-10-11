@@ -231,7 +231,8 @@
                         </div>
                     </div>
 
-                    <div class="card-footer">
+                    <div class="card-footer text-right">
+                        <a href="/karyawan" class="btn btn-secondary mr-1">Cancel</a>
                         <button type="submit" class="btn btn-primary float-right">Submit</button>
                     </div>
                 </div>
@@ -254,6 +255,6 @@
                 //replace the "Choose a file" label
                 $(this).next('.custom-file-label').html(cleanFileName);
             });
-        })
+        });
     </script>
 @endsection

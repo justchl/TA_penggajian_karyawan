@@ -1,9 +1,9 @@
 @extends('template')
-@section('title', 'Data Tunjangan')
+@section('title', 'Data Gaji')
 @section('content')
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Data Tunjangan</h1>
-    <p class="mb-4">Berikut list data tunjangan yang terdaftar.</p>
+    <h1 class="h3 mb-2 text-gray-800">Data Gaji</h1>
+    <p class="mb-4">Berikut list data gaji yang terdaftar.</p>
 
     <!-- DataTales Example -->
     @if(\Session::has('msg_success'))
@@ -19,11 +19,11 @@
         <div class="card-header py-3">
             <div class="row">
                 <div class="col-lg-6 col-xs-12">
-                    <h6 class="m-0 font-weight-bold text-primary">Data Tunjangan</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Data Gaji</h6>
                 </div>
 
                 <div class="col-lg-6 col-xs-12 text-right">
-                <a href="{{ url('tunjangan/tambah') }}"><i class="fa fa-plus"></i> Tambah Data</a>
+                <a href="{{ url('gaji/tambah') }}"><i class="fa fa-plus"></i> Tambah Data</a>
                 </div>
             </div>
         </div>
@@ -41,24 +41,7 @@
                     </thead>
 
                     <tbody>
-                        @php $no=1 @endphp
-                        @foreach ($data as $row)
-                            <tr>
-                                <td>{{ $no++ }}</td>
-                                <td>{{ $row->NIK }} a.n {{ $row->nama_karyawan }}</td>
-                                <td>{{ $row->nama_tunjangan }}</td>
-                                <td>{{ 'Rp. '.number_format($row->nilai_tunjangan, 0) }}</td>
-                                <td>
-                                    <a href="/tunjangan/edit/{{ $row->id_tunjangan }}" class="btn btn-primary">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                
-                                    <a href="/tunjangan/delete/{{ $row->id_tunjangan }}" class="btn btn-danger">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                </td>
-                            </tr>    
-                        @endforeach
+                        
                     </tbody>
                 </table>
             </div>
