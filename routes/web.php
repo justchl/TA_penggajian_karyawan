@@ -58,3 +58,6 @@ Route::post('/gaji/post', 'GajiController@store');
 Route::get('/gaji/edit/{id}', 'GajiController@edit');
 Route::put('/gaji/update/{id}', 'GajiController@update');
 Route::get('/gaji/delete/{id}', 'GajiController@delete');
+
+//Absensi
+Route::get('/absensi', 'AbsensiController@index');

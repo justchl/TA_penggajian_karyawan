@@ -34,14 +34,18 @@
                         <tr>
                             <th>No</th>
                             <th>NIK</th>
-                            <th>Nama Tunjangan</th>
-                            <th>Nilai Tunjangan</th>
+                            <th>Tanggal</th>
+                            <th>Gaji Pokok</th>
+                            <th>Tambahan</th>
+                            <th>Potongan</th>
+                            <th>Total Lembur</th>
+                            <th>Pajak</th>
+                            <th>Total</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        
                     </tbody>
                 </table>
             </div>
