@@ -55,6 +55,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ url('/karyawan') }}">Data Karyawan</a>
                         <a class="collapse-item" href="{{ url('/user') }}">Data User</a>
+                        <a class="collapse-item" href="{{ url('/level') }}">Data Level</a>
                     </div>
                 </div>
             </li>
@@ -64,7 +65,7 @@
 
             <!-- Nav Item - Absensi -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ url('/absensi') }}">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Absensi</span>
                 </a>
@@ -92,7 +93,7 @@
 
             <!-- Nav Item - Laporan -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ url('/laporan') }}">
                     <i class="fas fa-fw fa-file-alt"></i>
                     <span>Laporan</span>
                 </a>
@@ -228,7 +229,7 @@
 
 <!-- Page level custom scripts -->
 <script src="{{ url('assets/js/demo/datatables-demo.js') }}"></script>
-@yield('file_upload.js');
-@yield('format_currency.js');
+@yield('file_upload.js')
+@yield('format_currency.js')
 </body>
 </html>

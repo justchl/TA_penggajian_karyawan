@@ -27,6 +27,14 @@ Route::get('/user/edit/{id}', 'UserController@edit');
 Route::put('/user/update/{id}', 'UserController@update');
 Route::get('/user/delete/{id}', 'UserController@delete');
 
+//Level User
+Route::get('/level', 'LevelController@index');
+Route::get('/level/tambah', 'LevelController@create');
+Route::post('/level/post', 'LevelController@store');
+Route::get('/level/edit/{id}', 'LevelController@edit');
+Route::put('/level/update/{id}', 'LevelController@update');
+Route::get('/level/delete/{id}', 'LevelController@delete');
+
 //Karyawan 
 Route::get('/karyawan', 'KaryawanController@index');
 Route::get('/karyawan/tambah', 'KaryawanController@create');
