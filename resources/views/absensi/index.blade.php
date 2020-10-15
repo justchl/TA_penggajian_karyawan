@@ -43,7 +43,28 @@
                         </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody> 
+                        @php $no = 1; @endphp
+                        @foreach ($data as $row)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $row->NIK }} a.n {{ $row->nama_karyawan }}</td>
+                                <td>{{ $row->status_kehadiran }}</td>
+                                <td>{{ $row->tanggal }}</td>
+                                <td>{{ $row->masuk }}</td>
+                                <td>{{ $row->pulang }}</td>
+                                <td>{{ $row->keterangan }}</td>
+                                <td>
+                                    <a href="/absensi/edit/{{ $row->id_absensi }}" class="btn btn-primary">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                
+                                    <a href="/absensi/delete/{{ $row->id_absensi }}" class="btn btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -69,7 +69,7 @@
                                                     <div class="modal-body">
                                                         <div class="form-group">
                                                             <label>Hak Akses</label>
-                                                        <input type="text" class="form-control {{ $errors->has('hak_akses') ? 'is-invalid' : '' }}" name="hak_akses" placeholder="Nama Hak Akses" value="{{ $row->hak_akses }}">
+                                                        <input type="text" class="form-control {{ $errors->has('hak_akses') ? 'is-invalid' : '' }}" name="hak_akses" placeholder="Nama Hak Akses" value="{{ $row->hak_akses }}" required>
                                                             @if($errors->has('hak_akses'))
                                                                 <div class="invalid-feedback">
                                                                     {{ $errors->first('hak_akses') }}
@@ -109,7 +109,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label>Hak Akses</label>
-                                <input type="text" class="form-control {{ $errors->has('hak_akses') ? 'is-invalid' : '' }}" name="hak_akses" placeholder="Nama Hak Akses">
+                                <input type="text" class="form-control {{ $errors->has('hak_akses') ? 'is-invalid' : '' }}" name="hak_akses" placeholder="Nama Hak Akses" required>
                                 @if($errors->has('hak_akses'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('hak_akses') }}

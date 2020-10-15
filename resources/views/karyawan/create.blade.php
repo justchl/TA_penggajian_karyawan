@@ -26,14 +26,14 @@
 
                     <div class="card-body">
                         <div class="text-center">
-                            <img src="{{ url('assets/img/ava.png') }}" class="mb-3 profile-img">
+                            <img id="img-preview" src="{{ url('assets/img/ava.png') }}" class="mb-3 profile-img">
                         </div>
 
                         <div class="form-group">
                             <label>File Upload <span class="text-danger">*</span></label>
                             <div class="input-group">
                                 <div class="custom-file">
-                                    <input type="file" name="file" class="custom-file-input {{ $errors->has('file') ? 'is-invalid' : '' }}" id="inputGroupFile01">
+                                    <input type="file" name="file" class="custom-file-input {{ $errors->has('file') ? 'is-invalid' : '' }}" id="inputGroupFile01" onchange="document.getElementById('img-preview').src = window.URL.createObjectURL(this.files[0])">
                                     <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                 </div>
                             </div>
@@ -240,11 +240,13 @@
     </form>
 @endsection
 
-@section('file_upload.js')
+@section('karyawan.js')
     <script type="text/javascript">
         $(document).ready(function(){
             //Init Datepicker
-            $('#datepicker').datepicker();
+            $('#datepicker').datepicker({
+                autoclose : true
+            });
 
             //Get file name
             $('#inputGroupFile01').on('change',function(){

@@ -229,7 +229,8 @@
 
 <!-- Page level custom scripts -->
 <script src="{{ url('assets/js/demo/datatables-demo.js') }}"></script>
-@yield('file_upload.js')
+@yield('karyawan.js')
+@yield('absensi.js')
 @yield('format_currency.js')
 </body>
 </html>
