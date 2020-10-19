@@ -55,7 +55,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ url('/karyawan') }}">Data Karyawan</a>
                         <a class="collapse-item" href="{{ url('/user') }}">Data User</a>
-                        <a class="collapse-item" href="{{ url('/level') }}">Data Level</a>
+                        {{-- <a class="collapse-item" href="{{ url('/level') }}">Data Level</a> --}}
                     </div>
                 </div>
             </li>
