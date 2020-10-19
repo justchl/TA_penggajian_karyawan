@@ -29,4 +29,10 @@ class GajiController extends Controller
             'dataKaryawan' => $dataKaryawan
         ]);
     }
+
+    public function store(Request $request){
+        $this->validate($request, [
+            'nik' => 'required'
+        ]);
+    }
 }

@@ -231,6 +231,7 @@
 <script src="{{ url('assets/js/demo/datatables-demo.js') }}"></script>
 @yield('karyawan.js')
 @yield('absensi.js')
+@yield('gaji.js')
 @yield('format_currency.js')
 </body>
 </html>
