@@ -54,8 +54,8 @@
                 <div id="collapseMasterData" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ url('/karyawan') }}">Data Karyawan</a>
+                        <a class="collapse-item" href="{{ url('/tunjangan') }}">Data Tunjangan</a>
                         <a class="collapse-item" href="{{ url('/user') }}">Data User</a>
-                        {{-- <a class="collapse-item" href="{{ url('/level') }}">Data Level</a> --}}
                     </div>
                 </div>
             </li>
@@ -76,16 +76,10 @@
 
             <!-- Nav Item - Penggajian -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePenggajian" aria-expanded="true" aria-controls="collapsePenggajian">
+                <a class="nav-link" href="{{ url('/gaji') }}">
                     <i class="fas fa-fw fa-hand-holding-usd"></i>
                     <span>Penggajian</span>
                 </a>
-                <div id="collapsePenggajian" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="{{ url('/gaji') }}">Data Gaji</a>
-                        <a class="collapse-item" href="{{ url('/tunjangan') }}">Data Tunjangan</a>
-                    </div>
-                </div>
             </li>
             
             <!-- Divider -->
@@ -229,6 +223,7 @@
 
 <!-- Page level custom scripts -->
 <script src="{{ url('assets/js/demo/datatables-demo.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 @yield('karyawan.js')
 @yield('absensi.js')
 @yield('gaji.js')

@@ -35,3 +35,18 @@
     padding: 0 0 0 1rem;
     display: block;
 }
+
+.detail-karyawan .detail-foto{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.detail-karyawan .table-custom td{
+    border: 0;
+    padding: 0.5rem;
+}
+
+.form-gaji .detail-karyawan label{
+    font-size : 12px;
+}

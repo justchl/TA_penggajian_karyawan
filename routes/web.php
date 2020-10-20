@@ -42,6 +42,7 @@ Route::post('/karyawan/post', 'KaryawanController@store');
 Route::get('/karyawan/edit/{id}', 'KaryawanController@edit');
 Route::put('/karyawan/update/{id}', 'KaryawanController@update');
 Route::get('/karyawan/delete/{id}', 'KaryawanController@delete');
+Route::get('/karyawan/detail/{id}', 'KaryawanController@detail');
 
 //Tunjangan
 Route::get('/tunjangan', 'TunjanganController@index');
@@ -66,6 +67,8 @@ Route::post('/gaji/post', 'GajiController@store');
 Route::get('/gaji/edit/{id}', 'GajiController@edit');
 Route::put('/gaji/update/{id}', 'GajiController@update');
 Route::get('/gaji/delete/{id}', 'GajiController@delete');
+
+Route::get('/get-karyawan/{nik}', 'GajiController@getDataKaryawan');
 
 //Absensi
 Route::get('/absensi', 'AbsensiController@index');

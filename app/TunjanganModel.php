@@ -13,7 +13,6 @@ class TunjanganModel extends Model
     protected $primaryKey = 'id_tunjangan';
 
     protected $fillable = [
-        'NIK',
         'nama_tunjangan',
         'nilai_tunjangan'
     ];

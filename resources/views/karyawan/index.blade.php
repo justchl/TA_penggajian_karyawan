@@ -71,8 +71,9 @@
                                           Opsi
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="/karyawan/detail/{{ $row->NIK }}"><i class="fa fa-eye"></i> Detail</a>
                                             <a class="dropdown-item" href="/karyawan/edit/{{ $row->NIK }}"><i class="fa fa-edit"></i> Edit</a>
-                                          <a class="dropdown-item" href="/karyawan/delete/{{ $row->NIK }}"><i class="fa fa-trash"></i> Delete</a>
+                                            <a class="dropdown-item" href="/karyawan/delete/{{ $row->NIK }}"><i class="fa fa-trash"></i> Delete</a>
                                         </div>
                                     </div>
                                 </td>

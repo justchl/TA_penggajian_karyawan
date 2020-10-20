@@ -22,6 +22,17 @@ class GajiController extends Controller
         }
     }
 
+    public function getDataKaryawan($nik){
+        $data = DB::table('tb_karyawan')
+               ->where('NIK', $nik)
+               ->get();
+        
+        return response()->json(array(
+            'success' => true,
+            'data'     => $data
+        ));
+    }
+
     public function create(){
         $dataKaryawan = DB::table('tb_karyawan')->get();
 

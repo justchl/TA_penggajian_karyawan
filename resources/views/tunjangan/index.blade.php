@@ -33,7 +33,6 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>NIK</th>
                             <th>Nama Tunjangan</th>
                             <th>Nilai Tunjangan</th>
                             <th>Aksi</th>
@@ -45,7 +44,6 @@
                         @foreach ($data as $row)
                             <tr>
                                 <td>{{ $no++ }}</td>
-                                <td>{{ $row->NIK }} a.n {{ $row->nama_karyawan }}</td>
                                 <td>{{ $row->nama_tunjangan }}</td>
                                 <td>{{ 'Rp. '.number_format($row->nilai_tunjangan, 0) }}</td>
                                 <td>

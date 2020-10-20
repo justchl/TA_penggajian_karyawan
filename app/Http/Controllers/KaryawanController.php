@@ -147,4 +147,12 @@ class KaryawanController extends Controller
 
         return redirect('/karyawan')->with('msg_success', 'Data berhasil dihapus!');
     }
+
+    public function detail($id){
+        $data = KaryawanModel::find($id);
+        
+        return view('karyawan/detail', [
+            'data' => $data
+        ]);
+    }
 }
