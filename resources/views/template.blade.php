@@ -36,10 +36,11 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-            <a class="nav-link" href="{{ url('/dashboard') }}">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Dashboard</span></a>
+            <li class="nav-item {{ (request()->is('dashboard')) ? 'active' : '' }}">
+                <a class="nav-link" href="{{ url('/dashboard') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
             </li>
 
             <!-- Divider -->
@@ -64,7 +65,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Absensi -->
-            <li class="nav-item">
+            <li class="nav-item {{ (request()->is('absensi')) ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('/absensi') }}">
                     <i class="fas fa-fw fa-user"></i>
                     <span>Absensi</span>
@@ -75,7 +76,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Penggajian -->
-            <li class="nav-item">
+            <li class="nav-item {{ (request()->is('gaji')) ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('/gaji') }}">
                     <i class="fas fa-fw fa-hand-holding-usd"></i>
                     <span>Penggajian</span>
@@ -86,7 +87,7 @@
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Laporan -->
-            <li class="nav-item">
+            <li class="nav-item {{ (request()->is('laporan')) ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('/laporan') }}">
                     <i class="fas fa-fw fa-file-alt"></i>
                     <span>Laporan</span>

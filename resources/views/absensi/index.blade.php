@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="col-lg-6 col-xs-12 text-right">
-                <a href="{{ url('absensi/tambah') }}"><i class="fa fa-plus"></i> Tambah Data</a>
+                    <a href="{{ url('absensi/tambah') }}"> Import Data</a> / <a href="{{ url('absensi/tambah') }}"> Tambah Data</a>
                 </div>
             </div>
         </div>

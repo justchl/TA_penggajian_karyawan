@@ -70,5 +70,7 @@ Route::get('/gaji/delete/{id}', 'GajiController@delete');
 
 Route::get('/get-karyawan/{nik}', 'GajiController@getDataKaryawan');
 
-//Absensi
-Route::get('/absensi', 'AbsensiController@index');
+//Laporan
+Route::get('/laporan', 'laporanController@index');
+
+
