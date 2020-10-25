@@ -33,7 +33,6 @@
                             </div>
                         @endif
                     </div>
-                    <hr>
 
                     <div class="form-group row">
                         <div class="col-lg-4">
@@ -67,21 +66,21 @@
 
                     <div class="form-group row">
                         <div class="col-lg-4">
-                            <label><strong>Tanggal Lahir</strong></label>
+                            <label><strong>Jabatan</strong></label>
                         </div>
 
                         <div class="col-lg-8">
-                            <span id="label_tgl_lahir"></span>
+                            <span id="label_jabatan"></span>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <div class="col-lg-4">
-                            <label><strong>Status Kerja</strong></label>
+                            <label><strong>Golongan</strong></label>
                         </div>
 
                         <div class="col-lg-8">
-                            <span id="label_status_kerja"></span>
+                            <span id="label_golongan"></span>
                         </div>
                     </div>
                 </div>
@@ -90,56 +89,78 @@
 
         <div class="col-lg-8 col-md-6 col-xs-12">
             <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Form Gaji</h6>
-                </div>
-
                 <div class="card-body">
-                    <div class="form-group row">
-                        <div class="col-lg-6 col-xs-12">
-                            <label>Tanggal</label>
+                    <div class="form-group">
+                        <label>Tanggal</label>
+                        <div class="input-group">
                             <input type="text" class="form-control" id="datepickerGaji" name="tgl_gaji">
-                        </div>
-
-                        <div class="col-lg-6 col-xs-12">
-                            <label>Gaji Pokok</label>
-                            <input type="number" class="form-control" name="gaji_pokok">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                            </div>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <div class="col-lg-6 col-xs-12">
-                            <label>Potongan</label>
-                            <input type="number" class="form-control" name="potongan">
-                        </div>
+                            <label>Gaji Pokok</label>
 
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="font-size: 14px;">Rp.</span>
+                                </div>
+                                <input type="number" class="form-control" name="gaji_pokok" value="0">
+                            </div>
+                        </div>
+                        
                         <div class="col-lg-6 col-xs-12">
-                            <label>Total Lembur</label>
-                            <input type="number" class="form-control" name="total_lembur">
+                            <label>Potongan</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="font-size: 14px;">Rp.</span>
+                                </div>
+                                <input type="number" class="form-control" name="potongan" value="0">
+                            </div>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <div class="col-lg-6 col-xs-12">
                             <label>Pajak</label>
-                            <input type="number" class="form-control" name="pajak">
+                            <div class="input-group">
+                                <input type="number" class="form-control" name="pajak">
+                                <div class="input-group-append">
+                                    <span class="input-group-text" style="font-size: 14px;">%</span>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="col-lg-6 col-xs-12">
                             <label>Tambahan</label>
-                            <input type="number" class="form-control" name="tambahan">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="font-size: 14px;">Rp.</span>
+                                </div>
+                                <input type="number" class="form-control" name="tambahan">
+                            </div>
                         </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tunjangan</label>
+                        <select class="form-control" name="tunjangan">
+                            <option value="">Pilih Tunjangan</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
                         <label>Total</label>
                         <textarea type="number" class="form-control" name="total" readonly></textarea>
                     </div>
-                </div>
 
-                <div class="card-footer text-right">
-                    <a href="{{ url('/tunjangan') }}" class="btn btn-secondary mr-1">Cancel</a>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="form-group m-0 float-right">
+                        <button type="button" class="btn btn-secondary mr-1">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -162,14 +183,12 @@
                     url : '/get-karyawan/'+value,
                     success : function(res){
                         var data = res.data;
-                        //Date Format
-                        var tglLahir = moment(data[0].tanggal_lahir).format('MM/DD/YYYY');
                         
                         $('#label_nik').html(data[0].NIK);
                         $('#label_nama').html(data[0].nama_karyawan);
-                        $('#label_tgl_lahir').html(tglLahir);
+                        $('#label_golongan').html(data[0].golongan);
                         $('#label_gender').html(data[0].jenis_kelamin);
-                        $('#label_status_kerja').html(data[0].status_kerja);
+                        $('#label_jabatan').html(data[0].jabatan);
                     }
                 })
             });

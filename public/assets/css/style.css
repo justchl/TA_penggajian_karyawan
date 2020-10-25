@@ -1,4 +1,4 @@
-/* Form Karyawan */
+/* Style Karyawan */
 .form-karyawan .profile-img{
     width: 130px;
     height: 130px;
@@ -35,7 +35,9 @@
     padding: 0 0 0 1rem;
     display: block;
 }
+/* End Style Karyawan */
 
+/* Style Gaji */
 .detail-karyawan .detail-foto{
     width: 200px;
     height: 200px;
@@ -49,4 +51,31 @@
 
 .form-gaji .detail-karyawan label{
     font-size : 12px;
+}
+/* End Gaji */
+
+/* Modal Custom */
+.modal-import .modal-header{
+    border: 0;
+    padding-bottom: 0;
+}
+
+.modal-import .modal-body .wrap-img{
+    text-align: center;
+}
+
+.modal-import .modal-body .wrap-img img{
+    max-width: 70%;
+    height: auto;
+}
+
+.modal-import .modal-body .req-file{
+    background: #eaecf4;
+    padding: 1rem;
+    border-radius: 4px;
+}
+
+.modal-import .modal-body .req-file ul{
+    margin: 0;
+    padding: 0 1rem;
 }

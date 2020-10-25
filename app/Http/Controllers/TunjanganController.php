@@ -45,9 +45,11 @@ class TunjanganController extends Controller
 
     public function edit($id){
         $row = TunjanganModel::find($id);
+        $data = DB::table('tb_karyawan')->get();
 
         return view('tunjangan/edit', [
             'row'  => $row,
+            'data' => $data
         ]);
     }
 

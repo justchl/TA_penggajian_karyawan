@@ -126,13 +126,31 @@
                             @endif
                         </div>
 
+                        <div class="form-group">
+                            <label>Telp <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control {{ $errors->has('telp') ? 'is-invalid' : '' }}" name="telp" value="{{ $data->no_telp }}">
+                            @if($errors->has('telp'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('telp') }}
+                                </div>
+                            @endif
+                        </div>
+
                         <div class="form-group row">
                             <div class="col-lg-6 col-xs-12">
-                                <label>Telp <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control {{ $errors->has('telp') ? 'is-invalid' : '' }}" name="telp" value="{{ $data->no_telp }}">
-                                @if($errors->has('telp'))
+                                <label>Golongan <span class="text-danger">*</span></label>
+                                <select class="form-control {{ $errors->has('golongan') ? 'is-invalid' : '' }}" name="golongan">
+                                    <option value="">Pilih Golongan</option>
+                                    <option value="Penata Tk I/III d">Penata Tk I/III d</option>
+                                    <option value="Penata I/III D Lektor">Penata I/III D Lektor</option>
+                                    <option value="Penata I/III D As Ahli">Penata I/III D As Ahli</option>
+                                    <option value="Penata/III c Lektor">Penata/III c Lektor</option>
+                                    <option value="Penata Muda/II a">Penata Muda/II a</option>
+                                    <option value="Penata Muda TK I/III b">Penata Muda TK I/III b</option>
+                                </select>
+                                @if($errors->has('golongan'))
                                     <div class="invalid-feedback">
-                                        {{ $errors->first('telp') }}
+                                        {{ $errors->first('golongan') }}
                                     </div>
                                 @endif
                             </div>

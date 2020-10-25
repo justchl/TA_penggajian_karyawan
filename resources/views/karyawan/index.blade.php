@@ -39,6 +39,7 @@
                             <th>Jenis Kelamin</th>
                             <th>Agama</th>
                             <th>Jabatan</th>
+                            <th>Golongan</th>
                             <th>Pendidikan</th>
                             <th>Telp</th>
                             <th>Status Pernikahan</th>
@@ -60,6 +61,7 @@
                                 <td>{{ $row->jenis_kelamin }}</td>
                                 <td>{{ $row->agama }}</td>
                                 <td>{{ $row->jabatan }}</td>
+                                <td>{{ $row->golongan }}</td>
                                 <td>{{ $row->pendidikan }}</td>
                                 <td>{{ $row->no_telp }}</td>
                                 <td>{{ $row->status_pernikahan }}</td>

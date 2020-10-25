@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="col-lg-6 col-xs-12 text-right">
-                    <a href="{{ url('absensi/tambah') }}"> Import Data</a> / <a href="{{ url('absensi/tambah') }}"> Tambah Data</a>
+                    <a href="javascript:void(0)" data-toggle="modal" data-target="#modalImport"> Import Data</a> / <a href="{{ url('absensi/tambah') }}"> Tambah Data</a>
                 </div>
             </div>
         </div>
@@ -67,6 +67,43 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Import -->
+    <div id="modalImport" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content modal-import">
+                <div class="modal-body">
+                    <div class="wrap-img">
+                        <img src="{{ url('assets/img/file_upload2.png') }}" alt="File Upload">
+                        <div class="desc text-center">
+                            <h4>Upload File Disini</h4>
+                            <p>Silahkan upload file absensi dalam bentuk excel ke form dibawah ini.</p>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01">
+                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                        </div>
+                    </div>
+
+                    <div class="req-file">
+                        <ul>
+                            <li>Format file yang disarankan .xls, .xlsx</li>
+                            <li>Maksimal ukuran file adalah 1MB (MegaByte)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
             </div>
         </div>
     </div>

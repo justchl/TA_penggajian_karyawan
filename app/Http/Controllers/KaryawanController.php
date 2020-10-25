@@ -34,6 +34,7 @@ class KaryawanController extends Controller
             'tgl_lahir'         => 'required|date',
             'jenis_kelamin'     => 'required',
             'telp'              => 'required|numeric',
+            'golongan'          => 'required',
             'jabatan'           => 'required',
             'pendidikan'        => 'required',
             'agama'             => 'required',
@@ -58,6 +59,7 @@ class KaryawanController extends Controller
             'jenis_kelamin'     => $request->jenis_kelamin, 
             'agama'             => $request->agama,
             'jabatan'           => $request->jabatan,
+            'golongan'          => $request->golongan,
             'pendidikan'        => $request->pendidikan,
             'no_telp'           => $request->telp,
             'alamat'            => $request->alamat,
@@ -87,6 +89,7 @@ class KaryawanController extends Controller
             'jenis_kelamin'     => 'required',
             'telp'              => 'required|numeric',
             'jabatan'           => 'required',
+            'golongan'          => 'required',
             'pendidikan'        => 'required',
             'agama'             => 'required',
             'status_pernikahan' => 'required',
@@ -112,6 +115,7 @@ class KaryawanController extends Controller
             $data->tanggal_lahir        = Carbon::parse($request->tgl_lahir)->format('Y-m-d');
             $data->jenis_kelamin        = $request->jenis_kelamin;
             $data->agama                = $request->agama;
+            $data->golongan             = $request->golongan;
             $data->jabatan              = $request->jabatan;
             $data->pendidikan           = $request->pendidikan;
             $data->no_telp              = $request->telp;
@@ -129,6 +133,7 @@ class KaryawanController extends Controller
             $data->tanggal_lahir        = Carbon::parse($request->tgl_lahir)->format('Y-m-d');
             $data->jenis_kelamin        = $request->jenis_kelamin;
             $data->agama                = $request->agama;
+            $data->golongan             = $request->golongan;
             $data->jabatan              = $request->jabatan;
             $data->pendidikan           = $request->pendidikan;
             $data->no_telp              = $request->telp;

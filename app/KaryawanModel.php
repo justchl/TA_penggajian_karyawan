@@ -20,6 +20,7 @@ class KaryawanModel extends Model
         'jenis_kelamin', 
         'agama',
         'jabatan',
+        'golongan',
         'pendidikan',
         'no_telp',
         'alamat',
