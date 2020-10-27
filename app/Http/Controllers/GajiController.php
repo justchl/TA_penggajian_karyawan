@@ -34,10 +34,14 @@ class GajiController extends Controller
     }
 
     public function create(){
-        $dataKaryawan = DB::table('tb_karyawan')->get();
+        $dataKaryawan  = DB::table('tb_karyawan')->get();
+        $dataTunjangan = DB::table('tb_tunjangan')->first();
+
+        // dd($dataTunjangan);
 
         return view('gaji/create', [
-            'dataKaryawan' => $dataKaryawan
+            'dataKaryawan'   => $dataKaryawan,
+            'dataTunjangan'  => $dataTunjangan
         ]);
     }
 

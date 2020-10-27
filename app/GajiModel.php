@@ -17,10 +17,10 @@ class GajiModel extends Model
         'tunjangan',
         'tanggal',
         'gaji_pokok',
+        'tunjangan_pendidikan',
         'tambahan',
         'potongan',
-        'total_lembur',
-        'pajak',
+        'tunjangan_struktural',
         'total'
     ];
 }

@@ -26,21 +26,6 @@
                         @endif
 
                         <div class="form-group">
-                            <label>Karyawan</label>
-                            <select class="form-control {{ $errors->has('nik') ? 'is-invalid' : '' }}" name="nik">
-                                <option value="">Pilih Karyawan</option>
-                                @foreach ($data as $result)
-                                    <option value="{{ $result->NIK }}" {{ $result->NIK == $row->NIK ? 'selected' : '' }}>{{ $result->NIK }} - {{ $result->nama_karyawan }}</option>
-                                @endforeach
-                            </select>
-                            @if($errors->has('nik'))
-                                <div class="invalid-feedback">
-                                    {{ $errors->first('nik') }}
-                                </div>
-                            @endif
-                        </div>
-
-                        <div class="form-group">
                             <label>Nama Tunjangan</label>
                             <input type="text" class="form-control {{ $errors->has('nama_tunjangan') ? 'is-invalid' : '' }}" name="nama_tunjangan" value="{{ $row->nama_tunjangan }}">
                             @if($errors->has('nama_tunjangan'))

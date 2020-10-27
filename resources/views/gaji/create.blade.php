@@ -5,7 +5,7 @@
     <h1 class="h3 mb-2 text-gray-800">Form Gaji</h1>
     <p class="mb-4">Silahkan isi data dibawah ini dengan benar.</p>
     
-    <form action="{{ url('gaji/post') }}" class="form-gaji" method="post" autocomplete="off">
+    <form class="form-gaji" method="post" autocomplete="off">
     {{ csrf_field() }}
     <div class="row">
         @if(\Session::has('msg_success'))
@@ -108,7 +108,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" style="font-size: 14px;">Rp.</span>
                                 </div>
-                                <input type="number" class="form-control" name="gaji_pokok" value="0">
+                                <input type="number" id="gaji_pokok" class="form-control" name="gaji_pokok" value="0">
                             </div>
                         </div>
                         
@@ -123,43 +123,52 @@
                         </div>
                     </div>
 
-                    <div class="form-group row">
-                        <div class="col-lg-6 col-xs-12">
-                            <label>Pajak</label>
-                            <div class="input-group">
-                                <input type="number" class="form-control" name="pajak">
-                                <div class="input-group-append">
-                                    <span class="input-group-text" style="font-size: 14px;">%</span>
-                                </div>
+                    <div class="form-group">
+                        <fieldset class="tunjangan-border">
+                            <legend>Tunjangan <span class="text-danger">*</span></legend>
+                            
+                            <div class="form-group">
+                                <label>Tunj. Makan</label>
+                                <a href="{{ url('tunjangan/edit/'.$dataTunjangan->id_tunjangan) }}" class="float-right"><i class="fa fa-edit" style="font-size: 12px;"></i> Edit Tunjangan</a>
+                                <input type="hidden" class="form-control" name="tunjangan" value="{{ $dataTunjangan->id_tunjangan }}">
+                                <input type="number" class="form-control" name="nilai_tunjangan" value="{{ $dataTunjangan->nilai_tunjangan }}" readonly>
                             </div>
-                        </div>
 
-                        <div class="col-lg-6 col-xs-12">
-                            <label>Tambahan</label>
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" style="font-size: 14px;">Rp.</span>
-                                </div>
-                                <input type="number" class="form-control" name="tambahan">
+                            <div class="form-group">
+                                <label>Tunj. Pendidikan</label>
+                                <input type="number" class="form-control" name="tunjangan_pendidikan" value="0">
                             </div>
-                        </div>
+
+                            <div class="form-group">
+                                <label>Tunj. Stuktural</label>
+                                <input type="number" class="form-control" name="tunjangan_struktural" value="0">
+                            </div>
+                        </fieldset>
+                        {{-- @if($errors->has('jenis_kelamin'))
+                            <small class="text-danger">
+                                {{ $errors->first('jenis_kelamin') }}
+                            </small>
+                        @endif --}}
                     </div>
 
                     <div class="form-group">
-                        <label>Tunjangan</label>
-                        <select class="form-control" name="tunjangan">
-                            <option value="">Pilih Tunjangan</option>
-                        </select>
+                        <label>Tambahan</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" style="font-size: 14px;">Rp.</span>
+                            </div>
+                            <input type="number" class="form-control" name="tambahan" value="0">
+                        </div>
                     </div>
 
                     <div class="form-group">
                         <label>Total</label>
-                        <textarea type="number" class="form-control" name="total" readonly></textarea>
+                        <input type="number" id="total_gaji" class="form-control" name="total" value="0" style="height: 60px; font-size:2rem;" readonly>
                     </div>
 
                     <div class="form-group m-0 float-right">
                         <button type="button" class="btn btn-secondary mr-1">Cancel</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" id="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </div>
             </div>
@@ -191,6 +200,16 @@
                         $('#label_jabatan').html(data[0].jabatan);
                     }
                 })
+            });
+
+            $('#submit').on('click', function(){
+                var total = 0;
+                var gapok = $('input[name="gaji_pokok"]').val();
+                var potongan = $('input[name="potongan"]').val();
+                
+                total =+ (gapok - potongan);
+
+                $('#total_gaji').val(total);
             });
         })
     </script>
