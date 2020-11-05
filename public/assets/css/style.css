@@ -52,6 +52,11 @@
 .form-gaji .detail-karyawan label{
     font-size : 12px;
 }
+
+.form-gaji .tunjangan-fieldset{
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
 /* End Gaji */
 
 /* Modal Custom */

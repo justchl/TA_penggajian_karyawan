@@ -33,18 +33,45 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>NIK</th>
+                            <th>Karyawan</th>
                             <th>Tanggal</th>
                             <th>Gaji Pokok</th>
+                            <th>Tunjangan</th>
                             <th>Tambahan</th>
                             <th>Potongan</th>
-                            <th>Pajak</th>
                             <th>Total</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
 
                     <tbody>
+                        @php $no = 1; @endphp
+                        @foreach ($dataGaji as $row)
+                            <tr>
+                                <td>{{ $no++ }}</td>
+                                <td>{{ $row->NIK }} - {{ $row->nama_karyawan }}</td>
+                                <td>{{ $row->tanggal }}</td>
+                                <td>{{ 'Rp. '.number_format($row->gaji_pokok, 0) }}</td>
+                                <td>
+                                    <ul>
+                                        <li>{{ $row->nama_tunjangan }} {{ 'Rp. '.number_format($row->nilai_tunjangan) }}</li>
+                                        <li>Pendidikan {{ 'Rp. '.number_format($row->tunjangan_pendidikan) }}</li>
+                                    </ul>
+                                </td>
+                                <td>{{ 'Rp. '.number_format($row->tambahan, 0) }}</td>
+                                <td>{{ 'Rp. '.number_format($row->potongan, 0) }}</td>
+                                <td>{{ 'Rp. '.number_format($row->total, 0) }}</td>
+                                <td>
+                                    <a href="/gaji/edit/{{ $row->id_gaji }}" class="btn btn-primary">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                
+                                    <a href="/gaji/delete/{{ $row->id_gaji }}" class="btn btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

@@ -20,7 +20,6 @@ class GajiModel extends Model
         'tunjangan_pendidikan',
         'tambahan',
         'potongan',
-        'tunjangan_struktural',
         'total'
     ];
 }

@@ -11,7 +11,10 @@ use Illuminate\Support\Carbon;
 class GajiController extends Controller
 {
     public function index(){
-        $dataGaji = GajiModel::all();
+        $dataGaji = DB::table('tb_gaji')
+                    ->join('tb_karyawan', 'tb_karyawan.NIK', '=', 'tb_gaji.NIK')
+                    ->join('tb_tunjangan', 'tb_tunjangan.id_tunjangan', '=', 'tb_gaji.tunjangan')
+                    ->get();
 
         if(!Session::get('status')){
             return redirect('/')->with('warning_login', 'Silahkan login terlebih dahulu!');
@@ -37,8 +40,6 @@ class GajiController extends Controller
         $dataKaryawan  = DB::table('tb_karyawan')->get();
         $dataTunjangan = DB::table('tb_tunjangan')->first();
 
-        // dd($dataTunjangan);
-
         return view('gaji/create', [
             'dataKaryawan'   => $dataKaryawan,
             'dataTunjangan'  => $dataTunjangan
@@ -47,7 +48,67 @@ class GajiController extends Controller
 
     public function store(Request $request){
         $this->validate($request, [
-            'nik' => 'required'
+            'nik'                  => 'required',
+            'tgl'                  => 'required|date',
+            'gaji_pokok'           => 'required',
+            'potongan'             => 'required',
+            'tunjangan_pendidikan' => 'required',
+            'tambahan'             => 'required',
         ]);
+
+        GajiModel::create([
+            'NIK'                  => $request->nik,
+            'tunjangan'            => $request->id_tunjangan,
+            'tanggal'              => Carbon::parse($request->tgl)->format('Y-m-d'),
+            'gaji_pokok'           => $request->gaji_pokok,
+            'tunjangan_pendidikan' => $request->tunjangan_pendidikan,
+            'tambahan'             => $request->tambahan,
+            'potongan'             => $request->potongan,
+            'total'                => $request->total
+        ]);
+
+        return redirect('/gaji/tambah')->with('msg_success', 'Data berhasil ditambahkan!');
+    }
+
+    public function edit($id){
+        $row = GajiModel::find($id);
+        $dataKaryawan  = DB::table('tb_karyawan')->get();
+        $dataTunjangan = DB::table('tb_tunjangan')->first();
+
+        return view('gaji/edit', [
+            'row'  => $row,
+            'dataKaryawan'   => $dataKaryawan,
+            'dataTunjangan'  => $dataTunjangan
+        ]);
+    }
+
+    public function update($id, Request $request){
+        $this->validate($request, [
+            'nik'                  => 'required',
+            'tgl'                  => 'required|date',
+            'gaji_pokok'           => 'required',
+            'potongan'             => 'required',
+            'tunjangan_pendidikan' => 'required',
+            'tambahan'             => 'required',
+        ]);
+
+        $data = GajiModel::find($id);
+        
+        $data->tanggal              = $request->tgl;
+        $data->gaji_pokok           = $request->gaji_pokok;
+        $data->potongan             = $request->potongan;
+        $data->tunjangan_pendidikan = $request->tunjangan_pendidikan;
+        $data->tambahan             = $request->tambahan;
+        $data->total                = $request->total;
+        $data->save();
+
+        return redirect('/gaji/edit/'.$id)->with('msg_success', 'Data berhasil diupdate!');
+    }
+
+    public function delete($id){
+        $data = GajiModel::find($id);
+        $data->delete();
+
+        return redirect('/gaji')->with('msg_success', 'Data berhasil dihapus!');
     }
 }
