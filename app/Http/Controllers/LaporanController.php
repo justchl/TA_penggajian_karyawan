@@ -22,4 +22,16 @@ class LaporanController extends Controller
             ]);
         }
     }
+
+    public function detail($id){
+        $data = DB::table('tb_gaji')
+                ->join('tb_karyawan', 'tb_gaji.NIK', '=', 'tb_karyawan.NIK')
+                ->join('tb_tunjangan', 'tb_gaji.tunjangan', '=', 'tb_tunjangan.id_tunjangan')
+                ->where('tb_gaji.id_gaji', $id)
+                ->get();
+        
+        return view('laporan/detail', [
+            'data' => $data
+        ]);
+    }
 }

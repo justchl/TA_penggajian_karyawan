@@ -72,5 +72,5 @@ Route::get('/get-karyawan/{nik}', 'GajiController@getDataKaryawan');
 
 //Laporan
 Route::get('/laporan', 'laporanController@index');
-
+Route::get('/laporan/detail/{id}', 'laporanController@detail');
 

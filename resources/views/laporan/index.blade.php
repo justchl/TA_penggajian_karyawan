@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="col-lg-6 col-xs-12 text-right">
-                <a href="#"><i class="fa fa-print"></i> Print</a>
+                    <a href="#"><i class="fa fa-print"></i> Print All</a>
                 </div>
             </div>
         </div>
@@ -33,7 +33,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
+                            <th>Karyawan</th>
                             <th>Tanggal</th>
                             <th>Gaji Pokok</th>
                             <th>Tunjangan</th>
