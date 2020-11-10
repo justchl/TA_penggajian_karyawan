@@ -94,7 +94,7 @@ class GajiController extends Controller
 
         $data = GajiModel::find($id);
         
-        $data->tanggal              = $request->tgl;
+        $data->tanggal              = Carbon::parse($request->tgl)->format('Y-m-d');
         $data->gaji_pokok           = $request->gaji_pokok;
         $data->potongan             = $request->potongan;
         $data->tunjangan_pendidikan = $request->tunjangan_pendidikan;

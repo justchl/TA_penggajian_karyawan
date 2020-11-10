@@ -2,8 +2,8 @@
 @section('title', 'Tambah Data Gaji')
 @section('content')
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Form Gaji</h1>
-    <p class="mb-4">Silahkan isi data dibawah ini dengan benar.</p>
+    <h1 class="h3 mb-2 text-gray-800">Form Edit Gaji</h1>
+    <p class="mb-4">Pastikan data yang anda edit sudah benar.</p>
     
     @if(\Session::has('msg_success'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -94,7 +94,7 @@
                     <div class="form-group">
                         <label>Tanggal</label>
                         <div class="input-group">
-                            <input type="text" class="form-control {{ $errors->has('tgl') ? 'is-invalid' : '' }}" id="datepickerGaji" name="tgl" value="{{ $row->tanggal }}" readonly>
+                            <input type="text" class="form-control {{ $errors->has('tgl') ? 'is-invalid' : '' }}" id="datepickerGaji" name="tgl" value="{{ date('d/m/Y', strtotime($row->tanggal)) }}" readonly>
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                             </div>
@@ -114,7 +114,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" style="font-size: 14px;">Rp.</span>
                                 </div>
-                                <input type="text" class="form-control gaji {{ $errors->has('gaji_pokok') ? 'is-invalid' : '' }}" id="gaji_pokok" name="gaji_pokok" value="{{ $row->gaji_pokok }}">
+                                <input type="text" class="form-control gaji {{ $errors->has('gaji_pokok') ? 'is-invalid' : '' }}" id="gaji_pokok" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="calculateGaji()" name="gaji_pokok" value="{{ $row->gaji_pokok }}">
                                 @if($errors->has('gaji_pokok'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('gaji_pokok') }}
@@ -129,7 +129,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" style="font-size: 14px;">Rp.</span>
                                 </div>
-                                <input type="number" class="form-control gaji" id="potongan" name="potongan" onkeypress="return /[0-9]/i.test(event.key)" value="{{ $row->potongan }}">
+                                <input type="text" class="form-control gaji" id="potongan" name="potongan" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="calculateGaji()" value="{{ $row->potongan }}">
                             </div>
                         </div>
                     </div>
@@ -148,7 +148,7 @@
 
                             <div class="form-group">
                                 <label>Tunj. Pendidikan</label>
-                                <input type="text" class="form-control gaji {{ $errors->has('tunjangan_pendidikan') ? 'is-invalid' : '' }}" id="t_pendidikan" name="tunjangan_pendidikan" onkeypress="return /[0-9]/i.test(event.key)" value="{{ $row->tunjangan_pendidikan }}">
+                                <input type="text" class="form-control gaji {{ $errors->has('tunjangan_pendidikan') ? 'is-invalid' : '' }}" id="t_pendidikan" name="tunjangan_pendidikan" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="calculateGaji()" value="{{ $row->tunjangan_pendidikan }}">
                                 @if($errors->has('tunjangan_pendidikan'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('tunjangan_pendidikan') }}
@@ -164,13 +164,13 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" style="font-size: 14px;">Rp.</span>
                             </div>
-                            <input type="number" class="form-control gaji" id="tambahan" name="tambahan" onkeypress="return /[0-9]/i.test(event.key)" value="{{ $row->tambahan }}">
+                            <input type="text" class="form-control gaji" id="tambahan" name="tambahan" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="calculateGaji()" value="{{ $row->tambahan }}">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>Total</label>
-                        <input type="text" class="form-control" id="total" value="{{ $row->total }}" name="total" style="height: 60px; font-size:2rem;" readonly>
+                        <input type="text" class="form-control" id="total" name="total" value="{{ $row->total }}" style="height: 60px; font-size:2rem;" readonly>
                     </div>
 
                     <div class="form-group m-0 float-right">
@@ -185,12 +185,13 @@
 @endsection
 
 @section('gaji.js')
-    <script type="text/javascript">
+    <script type="text/javascript">       
         $(document).ready(function(){
             $('#datepickerGaji').datepicker({
                 autoclose: true,
-                todayHighlight : true
-            });
+                todayHighlight : true,
+                format: "dd/mm/yyyy",
+            }).datepicker("update", new Date());
 
             $('#nik').on('change', function(){
                 var value = $('#nik').val();
@@ -209,20 +210,22 @@
                     }
                 })
             });
-            
-            //Function Calculate Gaji
-            $('#tambahan').on('keyup', function(){
-                var t_pendidikan = parseFloat($('#t_pendidikan').val());
-                var potongan = parseFloat($('#potongan').val());
-                var gaji = parseFloat($('#gaji_pokok').val());
-                var t_makan = parseFloat($('#t_makanan').val());
-                var tambahan = parseFloat($('#tambahan').val());
-                //Count All
-                var result = (gaji + t_pendidikan + t_makan + tambahan) - potongan;
-
-                $("input[name='total']").val(result.toFixed(0));
-            });
         });
+
+        function calculateGaji(){
+            var gaji_pokok           = document.getElementById('gaji_pokok');
+            var tunjangan_makan      = document.getElementById('t_makanan');
+            var tunjangan_pendidikan = document.getElementById('t_pendidikan');
+            var tambahan             = document.getElementById('tambahan');
+            var potongan             = document.getElementById('potongan');
+            var total                = document.getElementById('total');
+            
+            if(isNaN){
+                total.value = (parseFloat(gaji_pokok.value) - parseFloat(potongan.value)) + parseFloat(tunjangan_makan.value) + parseFloat(tunjangan_pendidikan.value) + parseFloat(tambahan.value);
+            }else{
+                total.value = 0;
+            }
+        }
     </script>
 @endsection
 

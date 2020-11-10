@@ -53,4 +53,44 @@ class AbsensiController extends Controller
 
         return redirect('/absensi/tambah')->with('msg_success', 'Data berhasil ditambahkan!');
     }
+
+    public function edit($id){
+        $row = AbsensiModel::find($id);
+        $data = DB::table('tb_karyawan')->get();
+
+        return view('absensi/edit', [
+            'row'  => $row,
+            'dataKaryawan' => $data
+        ]);
+    }
+
+    public function update($id, Request $request){
+        $this->validate($request, [
+            'nik'               => 'required',
+            'tanggal'           => 'required|date',
+            'masuk'             => 'required',
+            'pulang'            => 'required',
+            'status_kehadiran'  => 'required',
+            'keterangan'        => 'required'
+        ]);
+
+        $data = AbsensiModel::find($id);
+        
+        $data->nik              = $request->nik;
+        $data->tanggal          = Carbon::parse($request->tanggal)->format('Y-m-d');
+        $data->masuk            = $request->masuk;
+        $data->pulang           = $request->pulang;
+        $data->status_kehadiran = $request->status_kehadiran;
+        $data->keterangan       = $request->keterangan;
+        $data->save();
+
+        return redirect('/absensi/edit/'.$id)->with('msg_success', 'Data berhasil diupdate!');
+    }
+
+    public function delete($id){
+        $data = AbsensiModel::find($id);
+        $data->delete();
+
+        return redirect('/absensi')->with('msg_success', 'Data berhasil dihapus!');
+    }
 }

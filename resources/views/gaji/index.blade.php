@@ -62,13 +62,15 @@
                                 <td>{{ 'Rp. '.number_format($row->potongan, 0) }}</td>
                                 <td>{{ 'Rp. '.number_format($row->total, 0) }}</td>
                                 <td>
-                                    <a href="/gaji/edit/{{ $row->id_gaji }}" class="btn btn-primary">
-                                        <i class="fa fa-edit"></i>
-                                    </a>
-                                
-                                    <a href="/gaji/delete/{{ $row->id_gaji }}" class="btn btn-danger">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                          Opsi
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="/gaji/edit/{{ $row->id_gaji }}"><i class="fa fa-edit"></i> Edit</a>
+                                            <a class="dropdown-item" href="/gaji/delete/{{ $row->id_gaji }}"><i class="fa fa-trash"></i> Delete</a>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
