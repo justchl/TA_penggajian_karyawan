@@ -15,6 +15,15 @@
         </div>
     @endif
 
+    @if(\Session::has('msg_error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span class="mr-1"><i class="fa fa-check-circle"></i></span> {{ Session::get('msg_error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="row">
@@ -76,35 +85,58 @@
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content modal-import">
-                <div class="modal-body">
-                    <div class="wrap-img">
-                        <img src="{{ url('assets/img/file_upload2.png') }}" alt="File Upload">
-                        <div class="desc text-center">
-                            <h4>Upload File Disini</h4>
-                            <p>Silahkan upload file absensi dalam bentuk excel ke form dibawah ini.</p>
+                <form action="{{ url('/absensi/uploadFile') }}" method="post" enctype="multipart/form-data">
+                    {{ csrf_field() }}
+                    <div class="modal-body">
+                        <div class="wrap-img">
+                            <img src="{{ url('assets/img/file_upload2.png') }}" alt="File Upload">
+                            <div class="desc text-center">
+                                <h4>Upload File Disini</h4>
+                                <p>Silahkan upload file absensi dalam bentuk excel ke form dibawah ini.</p>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input {{ $errors->has('file') ? 'is-invalid' : '' }}" id="inputGroupFile01" name="file">
+                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                            </div>
+                        </div>
+                        @if($errors->has('file'))
+                            <small class="text-danger">
+                                {{ $errors->first('file') }}
+                            </small>
+                        @endif
+
+                        <div class="req-file mt-3">
+                            <ul>
+                                <li>Format file yang disarankan .xls, .xlsx</li>
+                                <li>Maksimal ukuran file adalah 1MB (MegaByte)</li>
+                            </ul>
                         </div>
                     </div>
 
-                    <div class="input-group mb-3">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" id="inputGroupFile01">
-                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
-
-                    <div class="req-file">
-                        <ul>
-                            <li>Format file yang disarankan .xls, .xlsx</li>
-                            <li>Maksimal ukuran file adalah 1MB (MegaByte)</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
+@endsection
+
+@section('absensi.js')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            //Get file name
+            $('#inputGroupFile01').on('change',function(){
+                //get the file name
+                var fileName = $(this).val();
+                var cleanFileName = fileName.replace('C:\\fakepath\\', " ");
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(cleanFileName);
+            });
+        })
+    </script>
 @endsection

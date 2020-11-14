@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Carbon;
+use App\Imports\AbsensiImport;
+use Excel;
 
 class AbsensiController extends Controller
 {
@@ -32,14 +34,27 @@ class AbsensiController extends Controller
         ]);
     }
 
+    public function uploadFile(Request $request){
+        // $this->validate($request, [
+        //     'file' => 'required|mimes:xls,xlxs'
+        // ]);
+
+        if ($request->hasFile('file')) {
+            $file = $request->file('file'); //GET FILE
+            Excel::import(new AbsensiImport, $file); //IMPORT FILE 
+            
+            return redirect('/absensi')->with(['msg_success' => 'File berhasil diupload!']);
+        }
+        return redirect('/absensi')->with(['msg_error' => 'Silahkan upload file terlebih dahulu!']);
+    }
+
     public function store(Request $request){
         $this->validate($request, [
             'nik'               => 'required',
             'tanggal'           => 'required|date',
             'masuk'             => 'required',
             'pulang'            => 'required',
-            'status_kehadiran'  => 'required',
-            'keterangan'        => 'required'
+            'status_kehadiran'  => 'required'
         ]);
 
         AbsensiModel::create([

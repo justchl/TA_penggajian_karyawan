@@ -55,7 +55,7 @@
                                 <td>{{ $row->NIK }}</td>
                                 <td>{{ $row->nama_karyawan }}</td>
                                 <td>
-                                    <img src="assets/img/foto/{{ $row->foto }}" class="w-100">
+                                    <img src="{{ $row->foto == null ? 'assets/img/default_img.png' : 'assets/img/foto/'.$row->foto }}" class="w-100">
                                 </td>
                                 <td>{{ $row->tempat_lahir }}, {{ $row->tanggal_lahir }}</td>
                                 <td>{{ $row->jenis_kelamin }}</td>

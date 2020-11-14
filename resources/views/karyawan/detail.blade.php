@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="card-body text-center">
-                    <img src="{{ url('assets/img/foto/'.$data->foto) }}" class="detail-foto">
+                    <img src="{{ $data->foto == null ? '/assets/img/default_img.png' : '/assets/img/foto/'.$data->foto }}" class="detail-foto">
                 </div>
             </div>
         </div>

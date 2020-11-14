@@ -14,6 +14,15 @@
         </div>
     @endif
 
+    @if(\Session::has('msg_error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span class="mr-1"><i class="fa fa-times-circle"></i></span> {{ Session::get('msg_error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
     <!-- Form Add Karyawan -->
     <form action="/karyawan/update/{{ $data->NIK }}" class="form-karyawan" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
@@ -27,7 +36,7 @@
 
                     <div class="card-body">
                         <div class="text-center">
-                            <img src="{{ url('assets/img/foto/'.$data->foto) }}" class="mb-3 profile-img">
+                            <img src="{{ $data->foto == null ? '/assets/img/default_img.png' : '/assets/img/foto/'.$data->foto }}" class="mb-3 profile-img">
                         </div>
 
                         <div class="form-group">
@@ -141,12 +150,12 @@
                                 <label>Golongan <span class="text-danger">*</span></label>
                                 <select class="form-control {{ $errors->has('golongan') ? 'is-invalid' : '' }}" name="golongan">
                                     <option value="">Pilih Golongan</option>
-                                    <option value="Penata Tk I/III d">Penata Tk I/III d</option>
-                                    <option value="Penata I/III D Lektor">Penata I/III D Lektor</option>
-                                    <option value="Penata I/III D As Ahli">Penata I/III D As Ahli</option>
-                                    <option value="Penata/III c Lektor">Penata/III c Lektor</option>
-                                    <option value="Penata Muda/II a">Penata Muda/II a</option>
-                                    <option value="Penata Muda TK I/III b">Penata Muda TK I/III b</option>
+                                    <option value="Penata Tk I/III d" {{ $data->golongan == 'Penata Tk I/III d' ? 'selected' : '' }}>Penata Tk I/III d</option>
+                                    <option value="Penata I/III D Lektor" {{ $data->golongan == 'Penata I/III D Lektor' ? 'selected' : '' }}>Penata I/III D Lektor</option>
+                                    <option value="Penata I/III D As Ahli" {{ $data->golongan == 'Penata I/III D As Ahli' ? 'selected' : '' }}>Penata I/III D As Ahli</option>
+                                    <option value="Penata/III c Lektor" {{ $data->golongan == 'Penata/III c Lektor' ? 'selected' : '' }}>Penata/III c Lektor</option>
+                                    <option value="Penata Muda/II a" {{ $data->golongan == 'Penata Muda/II a' ? 'selected' : '' }}>Penata Muda/II a</option>
+                                    <option value="Penata Muda TK I/III b" {{ $data->golongan == 'Penata Muda TK I/III b' ? 'selected' : '' }}>Penata Muda TK I/III b</option>
                                 </select>
                                 @if($errors->has('golongan'))
                                     <div class="invalid-feedback">
@@ -159,7 +168,11 @@
                                 <label>Jabatan <span class="text-danger">*</span></label>
                                 <select class="form-control {{ $errors->has('jabatan') ? 'is-invalid' : '' }}" name="jabatan">
                                     <option value="">Pilih Jabatan</option>
-                                    <option value="Direktur" {{ $data->jabatan == 'Direktur' ? 'selected' : '' }}>Direktur</option>
+                                    <option value="Rektor" {{ $data->jabatan == 'Rektor' ? 'selected' : '' }}>Rektor</option>
+                                    <option value="Wakil Rektor" {{ $data->jabatan == 'Wakil Rektor' ? 'selected' : '' }}>Wakil Rektor</option>
+                                    <option value="KaProdi S.1 & Ners" {{ $data->jabatan == 'KaProdi S.1 & Ners' ? 'selected' : '' }}>KaProdi S1 & Ners</option>
+                                    <option value="Plt.Sek.Prodi S1 Kep" {{ $data->jabatan == 'Plt.Sek.Prodi S1 Kep' ? 'selected' : '' }}>Plt.Sek.Prodi S1 Kep</option>
+                                    <option value="Dosen" {{ $data->jabatan == 'Dosen' ? 'selected' : '' }}>Dosen</option>
                                 </select>
                                 @if($errors->has('jabatan'))
                                     <div class="invalid-feedback">
@@ -259,11 +272,13 @@
     </form>
 @endsection
 
-@section('file_upload.js')
+@section('karyawan.js')
     <script type="text/javascript">
         $(document).ready(function(){
             //Init Datepicker
-            $('#datepicker').datepicker();
+            $('#datepicker').datepicker({
+                format: "dd/mm/yyyy",
+            });
 
             //Get file name
             $('#inputGroupFile01').on('change',function(){

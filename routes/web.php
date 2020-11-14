@@ -59,6 +59,7 @@ Route::post('/absensi/post', 'AbsensiController@store');
 Route::get('/absensi/edit/{id}', 'AbsensiController@edit');
 Route::put('/absensi/update/{id}', 'AbsensiController@update');
 Route::get('/absensi/delete/{id}', 'AbsensiController@delete');
+Route::post('/absensi/uploadFile', 'AbsensiController@uploadFile');
 
 //Gaji
 Route::get('/gaji', 'GajiController@index');

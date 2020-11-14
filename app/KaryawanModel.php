@@ -27,6 +27,7 @@ class KaryawanModel extends Model
         'status_pernikahan',
         'status_kerja',
         'foto',
+        'id_sidik_jari',
         'id_user'
     ];
 }

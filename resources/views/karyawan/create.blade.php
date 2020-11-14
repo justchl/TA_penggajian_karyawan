@@ -14,6 +14,15 @@
         </div>
     @endif
 
+    @if(\Session::has('msg_error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span class="mr-1"><i class="fa fa-times-circle"></i></span> {{ Session::get('msg_error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
     <!-- Form Add Karyawan -->
     <form action="/karyawan/post" class="form-karyawan" method="post" enctype="multipart/form-data">
         {{ csrf_field() }}
@@ -161,8 +170,8 @@
                                     <option value="Rektor">Rektor</option>
                                     <option value="Wakil Rektor">Wakil Rektor</option>
                                     <option value="KaProdi S.1 & Ners">KaProdi S1 & Ners</option>
-                                    <option value="KaProdi S.1 & Ners">Plt.Sek.Prodi S1 Kep</option>
-                                    <option value="Wakil Rektor">Dosen</option>
+                                    <option value="Plt.Sek.Prodi S1 Kep">Plt.Sek.Prodi S1 Kep</option>
+                                    <option value="Dosen">Dosen</option>
                                 </select>
                                 @if($errors->has('jabatan'))
                                     <div class="invalid-feedback">
