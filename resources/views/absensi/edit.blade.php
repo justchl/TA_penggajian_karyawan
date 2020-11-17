@@ -26,11 +26,11 @@
                         @endif
 
                         <div class="form-group">
-                            <label>NIK <span class="text-danger">*</span></label>
+                            <label>Nama Karyawan <span class="text-danger">*</span></label>
                             <select class="form-control {{ $errors->has('nik') ? 'is-invalid' : '' }}" name="nik">
-                                <option value="">Pilih NIK</option>
+                                <option value="">Pilih Nama</option>
                                 @foreach ($dataKaryawan as $data)
-                                    <option value="{{ $data->NIK }}" {{ $row->NIK == $data->NIK ? 'selected' : '' }}>{{ $data->NIK }} - {{ $data->nama_karyawan }}</option>
+                                    <option value="{{ $data->NIK }}" {{ $row->NIK == $data->NIK ? 'selected' : '' }}>{{ $data->nama_karyawan }}</option>
                                 @endforeach
                             </select>
                             @if($errors->has('nik'))

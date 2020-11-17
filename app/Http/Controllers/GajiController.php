@@ -32,9 +32,22 @@ class GajiController extends Controller
         
         return response()->json(array(
             'success' => true,
-            'data'     => $data
+            'data'    => $data
         ));
     }
+
+    public function getPotongan($nik){
+        $data = DB::table('tb_absensi')
+                ->where('NIK', $nik)
+                ->whereRaw('HOUR(masuk) = 7')
+                ->whereRaw('MINUTE(masuk) > 30')
+                ->get();
+        
+        return response()->json(array(
+            'success' => true,
+            'data'    => $data
+        ));
+    }       
 
     public function create(){
         $dataKaryawan  = DB::table('tb_karyawan')->get();
@@ -49,7 +62,6 @@ class GajiController extends Controller
     public function store(Request $request){
         $this->validate($request, [
             'nik'                  => 'required',
-            'tgl'                  => 'required|date',
             'gaji_pokok'           => 'required',
             'potongan'             => 'required',
             'tunjangan_pendidikan' => 'required',

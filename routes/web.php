@@ -70,6 +70,7 @@ Route::put('/gaji/update/{id}', 'GajiController@update');
 Route::get('/gaji/delete/{id}', 'GajiController@delete');
 
 Route::get('/get-karyawan/{nik}', 'GajiController@getDataKaryawan');
+Route::get('/get-absensi/{nik}', 'GajiController@getPotongan');
 
 //Laporan
 Route::get('/laporan', 'laporanController@index');
