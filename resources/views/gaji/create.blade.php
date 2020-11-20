@@ -124,7 +124,7 @@
                         
                         <div class="col-lg-6 col-xs-12">
                             <label>Potongan</label>
-                            <a href="#" data-toggle="modal" data-target="#infoPotonganModal" class="float-right d-none" id="infoPotongan">
+                            <a href="#" data-toggle="modal" data-target="#modalInfo" class="float-right d-none" id="infoPotongan">
                                 <i class="fa fa-info-circle" style="font-size: 11px;"></i> Info Potongan
                             </a>
                             <div class="input-group">
@@ -184,6 +184,28 @@
         </div>
     </div>
     </form>
+
+    <!-- Modal Info -->
+    <div id="modalInfo" class="modal fade" role="dialog">
+        <div class="modal-dialog" style="max-width: 400px;">
+            <!-- Modal content-->
+            <div class="modal-content notify-content">
+                <div class="modal-body">
+                    <div class="wrap-img">
+                        <img src="{{ url('assets/img/notify.png') }}">
+                    </div>
+                    
+                    <div class="description">
+                        <p>Anda dikenakan potongan 50% dari tunjangan makan, karena mengalami keterlambatan absen.</p>
+                    </div>
+                    
+                    <div class="text-center mb-3">
+                        <button type="button" data-dismiss="modal" class="btn btn-primary">Dimengerti!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('gaji.js')
@@ -274,25 +296,10 @@
             return prefix == undefined ? rupiah : (rupiah ? '' + rupiah : '');
         }
 
-        // var rupiah1 = document.getElementById('gaji_pokok');
-        // var rupiah2 = document.getElementById('potongan');
-        // var rupiah3 = document.getElementById('t_pendidikan');
-        // var rupiah4 = document.getElementById('tambahan');
+        // var rupiah = document.getElementById('gaji_pokok');
 
-        // rupiah1.addEventListener('keyup', function(e){
-        //     rupiah1.value = formatRupiah(this.value, '');
-        // });
-
-        // rupiah2.addEventListener('keyup', function(e){
-        //     rupiah2.value = formatRupiah(this.value, '');
-        // });
-
-        // rupiah3.addEventListener('keyup', function(e){
-        //     rupiah3.value = formatRupiah(this.value, '');
-        // });
-
-        // rupiah4.addEventListener('keyup', function(e){
-        //     rupiah4.value = formatRupiah(this.value, '');
+        // rupiah.addEventListener('keyup', function(e){
+        //     rupiah.value = formatRupiah(this.value, '');
         // });
     </script>
 @endsection

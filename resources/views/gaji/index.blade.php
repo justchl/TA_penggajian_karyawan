@@ -49,7 +49,7 @@
                         @foreach ($dataGaji as $row)
                             <tr>
                                 <td>{{ $no++ }}</td>
-                                <td>{{ $row->NIK }} - {{ $row->nama_karyawan }}</td>
+                                <td>{{ $row->nama_karyawan }}</td>
                                 <td>{{ $row->tanggal }}</td>
                                 <td>{{ 'Rp. '.number_format($row->gaji_pokok, 0) }}</td>
                                 <td>

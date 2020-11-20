@@ -230,5 +230,6 @@
 @yield('gaji.js')
 @yield('input-currency.js')
 @yield('format_currency.js')
+@yield('laporan.js')
 </body>
 </html>

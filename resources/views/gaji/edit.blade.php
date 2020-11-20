@@ -125,11 +125,15 @@
                         
                         <div class="col-lg-6 col-xs-12">
                             <label>Potongan</label>
+
+                            <a href="#" data-toggle="modal" data-target="#modalInfo" class="float-right d-none" id="infoPotongan">
+                                <i class="fa fa-info-circle" style="font-size: 11px;"></i> Info Potongan
+                            </a>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" style="font-size: 14px;">Rp.</span>
                                 </div>
-                                <input type="text" class="form-control gaji" id="potongan" name="potongan" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="calculateGaji()" value="{{ $row->potongan }}">
+                                <input type="text" class="form-control gaji" id="potongan" name="potongan" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="calculateGaji()" value="{{ $row->potongan }}" readonly>
                             </div>
                         </div>
                     </div>
@@ -182,6 +186,28 @@
         </div>
     </div>
     </form>
+
+    <!-- Modal Info -->
+    <div id="modalInfo" class="modal fade" role="dialog">
+        <div class="modal-dialog" style="max-width: 400px;">
+            <!-- Modal content-->
+            <div class="modal-content notify-content">
+                <div class="modal-body">
+                    <div class="wrap-img">
+                        <img src="{{ url('assets/img/notify.png') }}">
+                    </div>
+                    
+                    <div class="description">
+                        <p>Anda dikenakan potongan 50% dari tunjangan makan, karena mengalami keterlambatan absen.</p>
+                    </div>
+                    
+                    <div class="text-center mb-3">
+                        <button type="button" data-dismiss="modal" class="btn btn-primary">Dimengerti!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('gaji.js')
@@ -190,7 +216,6 @@
             $('#datepickerGaji').datepicker({
                 autoclose: true,
                 todayHighlight : true,
-                format: "dd/mm/yyyy",
             }).datepicker("update", new Date());
 
             $('#nik').on('change', function(){
@@ -207,6 +232,8 @@
                         $('#label_golongan').html(data[0].golongan);
                         $('#label_gender').html(data[0].jenis_kelamin);
                         $('#label_jabatan').html(data[0].jabatan);
+
+                        potonganGaji();
                     }
                 })
             });
@@ -225,6 +252,28 @@
             }else{
                 total.value = 0;
             }
+        }
+
+        function potonganGaji(){
+            $('#potongan').val(0);
+            var nik = $('#nik').val();
+            var tunjanganMakan = $('#t_makanan').val();
+
+            $.ajax({
+                type : 'GET',
+                url : '/get-absensi/'+nik,
+                success : function(res){
+                    if(res.data.length == 0){
+                        $('#potongan').val(0);
+                        $('#infoPotongan').removeClass('d-block').addClass('d-none'); 
+                    }else{
+                        var totalPotongan = tunjanganMakan * 0.5;
+                        $('#potongan').val(totalPotongan);
+
+                        $('#infoPotongan').removeClass('d-none').addClass('d-block');
+                    }
+                }
+            })
         }
     </script>
 @endsection

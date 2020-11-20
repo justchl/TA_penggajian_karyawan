@@ -57,6 +57,23 @@
     border: 1px solid #ccc;
     border-radius: 4px;
 }
+
+.notify-content .modal-header{
+    border-bottom: 0;
+}
+
+.notify-content .wrap-img{
+    text-align: center;
+}
+
+.notify-content .wrap-img img{
+    max-width: 250px;
+    height: auto;
+}
+
+.notify-content .description{
+    text-align: center;
+}
 /* End Gaji */
 
 /* Modal Custom */

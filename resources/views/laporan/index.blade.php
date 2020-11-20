@@ -18,12 +18,22 @@
     <div class="card shadow mb-4">
         <div class="card-header py-3">
             <div class="row">
-                <div class="col-lg-6 col-xs-12">
+                <div class="col-lg-9 col-xs-12">
                     <h6 class="m-0 font-weight-bold text-primary">Data Laporan</h6>
                 </div>
 
-                <div class="col-lg-6 col-xs-12 text-right">
-                    <a href="#"><i class="fa fa-print"></i> Print All</a>
+                <div class="col-lg-3 col-xs-12 text-right">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="filterDatepicker" placeholder="Filter Date">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <a href="#" style="font-size: 14px; color:#333;">
+                                    <i class="fa fa-filter"></i>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                    {{-- <a href="#"><i class="fa fa-print"></i> Print All</a> --}}
                 </div>
             </div>
         </div>
@@ -69,4 +79,15 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('laporan.js')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#filterDatepicker').datepicker({
+                autoclose: true,
+                todayHighlight : true,
+            });
+        });
+    </script>
 @endsection
