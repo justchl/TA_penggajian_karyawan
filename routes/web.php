@@ -75,4 +75,6 @@ Route::get('/get-absensi/{nik}', 'GajiController@getPotongan');
 //Laporan
 Route::get('/laporan', 'laporanController@index');
 Route::get('/laporan/detail/{id}', 'laporanController@detail');
+Route::get('/laporan/cetak', 'laporanController@printReport');
+Route::post('/laporan/filter', 'laporanController@filterData');
 

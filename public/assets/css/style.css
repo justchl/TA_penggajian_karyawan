@@ -101,3 +101,33 @@
     margin: 0;
     padding: 0 1rem;
 }
+
+/* Table Detail Laporan */
+.table-detailLaporan tr td, .table-detailLaporan tr th{
+    text-align: center;
+    vertical-align: middle;
+}
+/* End */
+
+/* Print Report */
+.header-report{
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.header-report img{
+    max-width: 110px;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+.header-report h5{
+    font-size: 20px;
+}
+
+@media print{
+    .res-mediaPrint{
+        display: none;
+    }
+}
+/* End */

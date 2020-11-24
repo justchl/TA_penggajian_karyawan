@@ -20,6 +20,7 @@
     <link href="{{ url('assets/vendor/datatables/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
     <!-- Custom styles for datepicker -->
     <link href="{{ url('assets/vendor/datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
 </head>
 <body id="page-top">
     <!-- Page Wrapper -->
@@ -225,6 +226,8 @@
 <!-- Page level custom scripts -->
 <script src="{{ url('assets/js/demo/datatables-demo.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+<script src="{{ url('assets/vendor/chart.js-new/dist/Chart.js') }}"></script>
+@yield('dashboard.js')
 @yield('karyawan.js')
 @yield('absensi.js')
 @yield('gaji.js')
