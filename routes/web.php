@@ -18,6 +18,7 @@ Route::get('/logout', 'LoginController@logout');
 
 // Dashboard
 Route::get('/dashboard', 'DashboardController@index');
+Route::get('/dashboard/chart-gaji', 'DashboardController@getChartGaji');
 
 //User
 Route::get('/user', 'UserController@index');
