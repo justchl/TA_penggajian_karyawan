@@ -34,17 +34,12 @@
                         <tr>
                             <th>NIK</th>
                             <th>Nama</th>
-                            <th>Foto</th>
                             <th>TTL</th>
                             <th>Jenis Kelamin</th>
-                            <th>Agama</th>
                             <th>Jabatan</th>
                             <th>Golongan</th>
                             <th>Pendidikan</th>
                             <th>Telp</th>
-                            <th>Status Pernikahan</th>
-                            <th>Status Kerja</th>
-                            <th>Alamat</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -54,19 +49,15 @@
                             <tr>
                                 <td>{{ $row->NIK }}</td>
                                 <td>{{ $row->nama_karyawan }}</td>
-                                <td>
+                                {{-- <td>
                                     <img src="{{ $row->foto == null ? 'assets/img/default_img.png' : 'assets/img/foto/'.$row->foto }}" class="w-100">
-                                </td>
+                                </td> --}}
                                 <td>{{ $row->tempat_lahir }}, {{ $row->tanggal_lahir }}</td>
                                 <td>{{ $row->jenis_kelamin }}</td>
-                                <td>{{ $row->agama }}</td>
                                 <td>{{ $row->jabatan }}</td>
                                 <td>{{ $row->golongan }}</td>
                                 <td>{{ $row->pendidikan }}</td>
                                 <td>{{ $row->no_telp }}</td>
-                                <td>{{ $row->status_pernikahan }}</td>
-                                <td>{{ $row->status_kerja }}</td>
-                                <td>{{ $row->alamat }}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

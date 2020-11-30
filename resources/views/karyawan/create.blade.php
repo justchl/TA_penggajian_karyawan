@@ -72,7 +72,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label>NIK <span class="text-danger">*</span></label>
-                            <input type="number" class="form-control {{ $errors->has('nik') ? 'is-invalid' : '' }}" name="nik">
+                            <input type="text" class="form-control {{ $errors->has('nik') ? 'is-invalid' : '' }}" name="nik" onkeypress="return /[0-9]/i.test(event.key)">
                             @if($errors->has('nik'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('nik') }}

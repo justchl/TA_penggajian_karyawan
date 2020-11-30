@@ -11,7 +11,8 @@ use Illuminate\Support\Carbon;
 class KaryawanController extends Controller
 {
     public function index(){
-        $data = KaryawanModel::all();
+        $data = DB::table('tb_karyawan')
+                ->get();
 
         if(!Session::get('status')){
             return redirect('/')->with('warning_login', 'Silahkan login terlebih dahulu!');
@@ -28,12 +29,12 @@ class KaryawanController extends Controller
 
     public function store(Request $request){
         $this->validate($request, [
-            'nik'               => 'required|numeric|unique:tb_karyawan,NIK',
+            'nik'               => 'required|unique:tb_karyawan,NIK',
             'nama'              => 'required',
             'tempat'            => 'required',
             'tgl_lahir'         => 'required|date',
             'jenis_kelamin'     => 'required',
-            'telp'              => 'required|numeric',
+            'telp'              => 'required',
             'golongan'          => 'required',
             'jabatan'           => 'required',
             'pendidikan'        => 'required',
@@ -87,7 +88,9 @@ class KaryawanController extends Controller
     }
 
     public function edit($id){
-        $data = KaryawanModel::find($id);
+        $data = DB::table('tb_karyawan')
+                ->where('NIK', $id)
+                ->first();
 
         return view('karyawan/edit', [
             'data' => $data
@@ -96,12 +99,12 @@ class KaryawanController extends Controller
 
     public function update($id, Request $request){
         $this->validate($request, [
-            'nik'               => 'required|numeric',
+            'nik'               => 'required|unique:tb_karyawan,NIK',
             'nama'              => 'required',
             'tempat'            => 'required',
             'tgl_lahir'         => 'required|date',
             'jenis_kelamin'     => 'required',
-            'telp'              => 'required|numeric',
+            'telp'              => 'required',
             'jabatan'           => 'required',
             'golongan'          => 'required',
             'pendidikan'        => 'required',
@@ -186,7 +189,9 @@ class KaryawanController extends Controller
     }
 
     public function detail($id){
-        $data = KaryawanModel::find($id);
+        $data = DB::table('tb_karyawan')
+                ->where('NIK', $id)
+                ->first();
         
         return view('karyawan/detail', [
             'data' => $data

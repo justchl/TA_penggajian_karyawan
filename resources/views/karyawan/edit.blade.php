@@ -73,7 +73,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label>NIK <span class="text-danger">*</span></label>
-                            <input type="number" class="form-control {{ $errors->has('nik') ? 'is-invalid' : '' }}" name="nik" value="{{ $data->NIK }}">
+                            <input type="number" class="form-control {{ $errors->has('nik') ? 'is-invalid' : '' }}" name="nik" value="{{ $data->NIK }}" readonly>
                             @if($errors->has('nik'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('nik') }}
