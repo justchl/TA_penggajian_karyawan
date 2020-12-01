@@ -38,7 +38,7 @@
         <div class="col-lg-12 col-xs-12 mt-5">
             <div class="float-left">
                 <p class="m-0">DAFTAR GAJI</p>
-                <P>BULAN : JANUARI 2020</P>
+                <p class="text-uppercase">BULAN : {{ $bulan }} {{ $tahun }}</p>
             </div>
 
             <div class="float-right res-mediaPrint">
@@ -83,16 +83,16 @@
                                 <td>{{ 'Rp. '.number_format($row->nilai_tunjangan, 0) }}</td>
                                 <td>{{ 'Rp. '.number_format($row->total, 0) }}</td>
                             </tr>
-
-                            <tr>
-                                <td colspan="5" class="font-weight-bold">Jumlah</td>
-                                <td class="font-weight-bold">{{ 'Rp. '.number_format($row->gaji_pokok, 0) }}</td>
-                                <td class="font-weight-bold">{{ 'Rp. '.number_format($row->tunjangan_pendidikan + $row->nilai_tunjangan,0) }}</td>
-                                <td class="font-weight-bold">{{ 'Rp. '.number_format($row->tunjangan_pendidikan, 0) }}</td>
-                                <td class="font-weight-bold">{{ 'Rp. '.number_format($row->nilai_tunjangan, 0) }}</td>
-                                <td class="font-weight-bold">{{ 'Rp. '.number_format($row->total, 0) }}</td>
-                            </tr>
                         @endforeach
+
+                        <tr>
+                            <td colspan="5" class="font-weight-bold">Jumlah</td>
+                            <td class="font-weight-bold">{{ 'Rp. '.number_format($totalGapok, 0) }}</td>
+                            <td class="font-weight-bold">{{ 'Rp. '.number_format($totalTunjMakan+$totalTunjPendidikan,0) }}</td>
+                            <td class="font-weight-bold">{{ 'Rp. '.number_format($totalTunjPendidikan, 0) }}</td>
+                            <td class="font-weight-bold">{{ 'Rp. '.number_format($totalTunjMakan, 0) }}</td>
+                            <td class="font-weight-bold">{{ 'Rp. '.number_format($grandTotal, 0) }}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

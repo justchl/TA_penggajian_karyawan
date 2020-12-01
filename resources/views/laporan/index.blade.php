@@ -19,7 +19,7 @@
         <div class="card-header py-3">
             <div class="row">
                 <div class="col-lg-8 col-xs-12">
-                    <a href="{{ url('laporan/cetak') }}" class="btn btn-success"><i class="fa fa-print"></i> Print</a>
+                    <a href="{{ url('laporan/cetak?bulan='.$bulan.'&tahun='.$tahun) }}" class="btn btn-success" id="printAll"><i class="fa fa-print"></i> Print All</a>
                 </div>
 
                 <div class="col-lg-4 col-xs-12 text-right">
@@ -147,6 +147,8 @@
                                          '</td>'+
                                          '</tr>';
                         }
+
+                        $('#printAll').attr('href',"/laporan/cetak?bulan="+month+"&tahun="+year);
 
                         $('#dataLaporan').html(dataTable);
                         $('#dataTable').dataTable();

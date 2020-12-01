@@ -27,18 +27,17 @@
             },
             success: function(response){
                 var data = response.data;
-                var bulan = response.bulan;
                 var result = [];
                 var labels = [];
                 var ctx;
 
-                // console.log(response);
+                console.log(response);
 
                 ctx = $('#chartGaji');
 
                 for (var i = 0; i < data.length; i++) {
                     result.push(data[i].total_gaji);
-                    labels.push(data[i].bulan);
+                    labels.push(data[i].bulan_label);
                 }
 
                 var myChart = new Chart(ctx, {

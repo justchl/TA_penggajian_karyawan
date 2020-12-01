@@ -18,31 +18,38 @@ class DashboardController extends Controller
 
     public function getChartGaji(){
         $bulan = [
-            '1' => 'Januari',
-            '2' => 'Februari',
-            '3' => 'Maret',
-            '4' => 'April',
-            '5' => 'Mei',
-            '6' => 'Juni',
-            '7' => 'Juli',
-            '8' => 'Agustus',
-            '9' => 'September',
-            '10' => 'Obtober',
-            '11' => 'November',
-            '12' => 'Desember'
+            'Januari',
+            'Februari',
+            'Maret',
+            'April',
+            'Mei',
+            'Juni',
+            'Juli',
+            'Agustus',
+            'September',
+            'Obtober',
+            'November',
+            'Desember'
         ];
 
+        $dataBulan = [];
+
         $data = DB::table('tb_gaji')
-                ->select(DB::raw('sum(total) as total_gaji, DATE_FORMAT(tanggal, "%b") as bulan'))
+                ->select(DB::raw('sum(total) as total_gaji, MONTH(tanggal) as bulan'))
                 ->join('tb_karyawan', 'tb_gaji.NIK', '=', 'tb_karyawan.NIK')
                 ->join('tb_tunjangan', 'tb_gaji.tunjangan', '=', 'tb_tunjangan.id_tunjangan')
                 ->groupBy('bulan')
                 ->get();
+
+        foreach ($data as $key => $value) {
+            # code...
+            $value->bulan_label = $bulan[$value->bulan-1];
+            $dataBulan[] = $value;
+        }
         
         return response()->json(array(
             'success' => true,
-            'data'    => $data,
-            'bulan'   => $bulan
+            'data'    => $dataBulan,
         ));
     }
 }
