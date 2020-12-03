@@ -53,6 +53,14 @@ Route::get('/tunjangan/edit/{id}', 'TunjanganController@edit');
 Route::put('/tunjangan/update/{id}', 'TunjanganController@update');
 Route::get('/tunjangan/delete/{id}', 'TunjanganController@delete');
 
+//Golongan
+Route::get('/golongan', 'GolonganController@index');
+Route::get('/golongan/tambah', 'GolonganController@create');
+Route::post('/golongan/post', 'GolonganController@store');
+Route::get('/golongan/edit/{id}', 'GolonganController@edit');
+Route::put('/golongan/update/{id}', 'GolonganController@update');
+Route::get('/golongan/delete/{id}', 'GolonganController@delete');
+
 //Absensi
 Route::get('/absensi', 'AbsensiController@index');
 Route::get('/absensi/tambah', 'AbsensiController@create');
