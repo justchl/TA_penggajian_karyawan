@@ -34,6 +34,7 @@ class LaporanController extends Controller
     public function detail($id){
         $data = DB::table('tb_gaji')
                 ->join('tb_karyawan', 'tb_gaji.NIK', '=', 'tb_karyawan.NIK')
+                ->join('tb_golongan','tb_karyawan.golongan','=','tb_golongan.id_golongan')
                 ->join('tb_tunjangan', 'tb_gaji.tunjangan', '=', 'tb_tunjangan.id_tunjangan')
                 ->where('tb_gaji.id_gaji', $id)
                 ->get();
@@ -64,6 +65,7 @@ class LaporanController extends Controller
 
         $data = DB::table('tb_gaji')
                 ->join('tb_karyawan', 'tb_gaji.NIK', '=', 'tb_karyawan.NIK')
+                ->join('tb_golongan','tb_karyawan.golongan','=','tb_golongan.id_golongan')
                 ->join('tb_tunjangan', 'tb_gaji.tunjangan', '=', 'tb_tunjangan.id_tunjangan')
                 ->whereMonth('tanggal', $month)
                 ->whereYear('tanggal', $year)
@@ -72,6 +74,7 @@ class LaporanController extends Controller
         $summary = DB::table('tb_gaji')
                 ->select(DB::raw('sum(tb_gaji.gaji_pokok) as total_gaji_pokok, sum(tb_gaji.total) as grand_total, sum(tb_tunjangan.nilai_tunjangan) as tunjangan_makan, sum(tb_gaji.tunjangan_pendidikan) as tunjangan_pendidikan'))
                 ->join('tb_karyawan', 'tb_gaji.NIK', '=', 'tb_karyawan.NIK')
+                ->join('tb_golongan','tb_karyawan.golongan','=','tb_golongan.id_golongan')
                 ->join('tb_tunjangan', 'tb_gaji.tunjangan', '=', 'tb_tunjangan.id_tunjangan')
                 ->whereMonth('tanggal', $month)
                 ->whereYear('tanggal', $year)

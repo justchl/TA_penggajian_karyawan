@@ -12,6 +12,7 @@ class KaryawanController extends Controller
 {
     public function index(){
         $data = DB::table('tb_karyawan')
+                ->join('tb_golongan','tb_karyawan.golongan','=','tb_golongan.id_golongan')
                 ->get();
 
         if(!Session::get('status')){

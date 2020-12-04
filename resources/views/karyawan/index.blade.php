@@ -55,7 +55,7 @@
                                 <td>{{ $row->tempat_lahir }}, {{ $row->tanggal_lahir }}</td>
                                 <td>{{ $row->jenis_kelamin }}</td>
                                 <td>{{ $row->jabatan }}</td>
-                                <td>{{ $row->golongan }}</td>
+                                <td>{{ $row->nama_golongan }}</td>
                                 <td>{{ $row->pendidikan }}</td>
                                 <td>{{ $row->no_telp }}</td>
                                 <td>

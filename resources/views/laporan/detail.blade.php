@@ -13,6 +13,7 @@
                   <th rowspan="2">No</th>
                   <th rowspan="2">Nama</th>
                   <th rowspan="2">Jabatan</th>
+                  <th rowspan="2">Masa Kerja</th>
                   <th rowspan="2">Pangkat<br>Golongan</th>
                   <th rowspan="2">Pendidikan</th>
                   <th rowspan="2">Gaji Pokok</th>
@@ -34,7 +35,8 @@
                     <td>{{ $no++ }}</td>
                     <td>{{ $row->nama_karyawan }}</td>
                     <td>{{ $row->jabatan }}</td>
-                    <td>{{ $row->golongan }}</td>
+                    <td>{{ $row->masa_kerja }}</td>
+                    <td>{{ $row->nama_golongan }}</td>
                     <td>{{ $row->pendidikan }}</td>
                     <td>{{ 'Rp. '.number_format($row->gaji_pokok, 0) }}</td>
                     <td>{{ 'Rp. '.number_format($row->tunjangan_pendidikan + $row->nilai_tunjangan,0) }}</td>
@@ -44,7 +46,7 @@
                 </tr>
 
                 <tr>
-                    <td colspan="5" class="font-weight-bold">Jumlah</td>
+                    <td colspan="6" class="font-weight-bold">Jumlah</td>
                     <td class="font-weight-bold">{{ 'Rp. '.number_format($row->gaji_pokok, 0) }}</td>
                     <td class="font-weight-bold">{{ 'Rp. '.number_format($row->tunjangan_pendidikan + $row->nilai_tunjangan,0) }}</td>
                     <td class="font-weight-bold">{{ 'Rp. '.number_format($row->tunjangan_pendidikan, 0) }}</td>
