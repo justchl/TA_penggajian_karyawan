@@ -27,6 +27,7 @@ class GajiController extends Controller
 
     public function getDataKaryawan($nik){
         $data = DB::table('tb_karyawan')
+               ->join('tb_golongan', 'tb_karyawan.golongan','=','tb_golongan.id_golongan')
                ->where('NIK', $nik)
                ->get();
         
@@ -76,6 +77,7 @@ class GajiController extends Controller
             'tunjangan_pendidikan' => $request->tunjangan_pendidikan,
             'tambahan'             => $request->tambahan,
             'potongan'             => $request->potongan,
+            'lembur'               => $request->lembur,
             'total'                => $request->total
         ]);
 
@@ -111,6 +113,7 @@ class GajiController extends Controller
         $data->potongan             = $request->potongan;
         $data->tunjangan_pendidikan = $request->tunjangan_pendidikan;
         $data->tambahan             = $request->tambahan;
+        $data->lembur               = $request->lembur;
         $data->total                = $request->total;
         $data->save();
 

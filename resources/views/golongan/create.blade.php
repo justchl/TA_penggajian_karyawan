@@ -36,10 +36,20 @@
 
                         <div class="form-group">
                             <label>Gaji Pokok</label>
-                            <input type="text" class="form-control {{ $errors->has('gaji_pokok') ? 'is-invalid' : '' }}" name="gaji_pokok" onkeypress="return /[0-9]/i.test(event.key)">
+                            <input type="text" class="form-control {{ $errors->has('gaji_pokok') ? 'is-invalid' : '' }}" name="gaji_pokok" onkeypress="return /[0-9]/i.test(event.key)" placeholder="Rp.">
                             @if($errors->has('gaji_pokok'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('gaji_pokok') }}
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="form-group">
+                            <label>Masa Kerja</label>
+                            <input type="text" class="form-control {{ $errors->has('masa_kerja') ? 'is-invalid' : '' }}" name="masa_kerja" onkeypress="return /[0-9]/i.test(event.key)" placeholder="Bulan">
+                            @if($errors->has('masa_kerja'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('masa_kerja') }}
                                 </div>
                             @endif
                         </div>

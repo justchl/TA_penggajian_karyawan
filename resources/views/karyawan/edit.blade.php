@@ -148,7 +148,13 @@
                         <div class="form-group row">
                             <div class="col-lg-6 col-xs-12">
                                 <label>Golongan <span class="text-danger">*</span></label>
-                                <select class="form-control {{ $errors->has('golongan') ? 'is-invalid' : '' }}" name="golongan">
+                                <select class="form-control {{ $errors->has('golongan') ? 'is-invalid' : '' }}" name="golongan" name="golongan">
+                                    <option value="">Pilih Golongan</option>
+                                    @foreach ($golongan as $row)
+                                        <option value="{{ $row->id_golongan }}" {{ $data->id_golongan == $row->id_golongan ? 'selected' : '' }}>{{ $row->nama_golongan }}</option>
+                                    @endforeach
+                                </select>
+                                {{-- <select class="form-control {{ $errors->has('golongan') ? 'is-invalid' : '' }}" name="golongan">
                                     <option value="">Pilih Golongan</option>
                                     <option value="Penata Tk I/III d" {{ $data->golongan == 'Penata Tk I/III d' ? 'selected' : '' }}>Penata Tk I/III d</option>
                                     <option value="Penata I/III D Lektor" {{ $data->golongan == 'Penata I/III D Lektor' ? 'selected' : '' }}>Penata I/III D Lektor</option>
@@ -156,7 +162,7 @@
                                     <option value="Penata/III c Lektor" {{ $data->golongan == 'Penata/III c Lektor' ? 'selected' : '' }}>Penata/III c Lektor</option>
                                     <option value="Penata Muda/II a" {{ $data->golongan == 'Penata Muda/II a' ? 'selected' : '' }}>Penata Muda/II a</option>
                                     <option value="Penata Muda TK I/III b" {{ $data->golongan == 'Penata Muda TK I/III b' ? 'selected' : '' }}>Penata Muda TK I/III b</option>
-                                </select>
+                                </select> --}}
                                 @if($errors->has('golongan'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('golongan') }}

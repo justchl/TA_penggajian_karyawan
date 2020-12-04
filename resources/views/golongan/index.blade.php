@@ -35,6 +35,7 @@
                             <th>No</th>
                             <th>Nama Golongan</th>
                             <th>Gaji Pokok</th>
+                            <th>Masa Kerja (Bulan)</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -46,6 +47,7 @@
                             <td>{{ $no++ }}</td>
                             <td>{{ $row->nama_golongan }}</td>
                             <td>{{ 'Rp. '.number_format($row->nilai, 0) }}</td>
+                            <td>{{ $row->masa_kerja }}</td>
                             <td>
                                 <a href="/golongan/edit/{{ $row->id_golongan }}" class="btn btn-primary">
                                     <i class="fa fa-edit"></i>

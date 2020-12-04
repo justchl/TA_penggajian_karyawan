@@ -44,6 +44,16 @@
                                 </div>
                             @endif
                         </div>
+
+                        <div class="form-group">
+                            <label>Masa Kerja</label>
+                            <input type="text" class="form-control {{ $errors->has('masa_kerja') ? 'is-invalid' : '' }}" name="masa_kerja" onkeypress="return /[0-9]/i.test(event.key)" value="{{ $data->masa_kerja }}">
+                            @if($errors->has('masa_kerja'))
+                                <div class="invalid-feedback">
+                                    {{ $errors->first('masa_kerja') }}
+                                </div>
+                            @endif
+                        </div>
                     </div>
 
                     <div class="card-footer text-right">

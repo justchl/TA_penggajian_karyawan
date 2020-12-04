@@ -5,14 +5,37 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Carbon;
 
 class DashboardController extends Controller
 {
     public function index(){
+        $dateNow = Carbon::now();
+        $formated = Carbon::parse($dateNow)->format('m');
+        //Data Karyawan
+        $karyawan = DB::table('tb_karyawan')->count();
+        //Data User
+        $user = DB::table('tb_user')->count();
+        //Data Absensi
+        $absensi = DB::table('tb_absensi')->count();
+        //Total Expense Monthly
+        $summary = DB::table('tb_gaji')
+                ->select(DB::raw('sum(tb_gaji.total) as grand_total'))
+                ->join('tb_karyawan', 'tb_gaji.NIK', '=', 'tb_karyawan.NIK')
+                ->join('tb_tunjangan', 'tb_gaji.tunjangan', '=', 'tb_tunjangan.id_tunjangan')
+                ->whereMonth('tanggal', $formated)
+                ->whereYear('tanggal', $dateNow->format('Y'))
+                ->first();
+
         if(!Session::get('status')){
             return redirect('/')->with('warning_login', 'Silahkan login terlebih dahulu!');
         }else{
-            return view('dashboard/index');
+            return view('dashboard/index',[
+                'countKaryawan' => $karyawan,
+                'countUser'     => $user,
+                'countAbsensi'  => $absensi,
+                'expense'       => $summary->grand_total
+            ]);
         }
     }
 

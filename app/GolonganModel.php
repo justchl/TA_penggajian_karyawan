@@ -14,6 +14,7 @@ class GolonganModel extends Model
 
     protected $fillable = [
         'nama_golongan',
-        'nilai'
+        'nilai',
+        'masa_kerja'
     ];
 }

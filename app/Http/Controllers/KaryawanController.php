@@ -24,7 +24,11 @@ class KaryawanController extends Controller
     }
 
     public function create(){
-        return view('karyawan/create');
+        $data = DB::table('tb_golongan')->get();
+
+        return view('karyawan/create', [
+            'data' => $data
+        ]);
     }
 
     public function store(Request $request){
@@ -91,9 +95,13 @@ class KaryawanController extends Controller
         $data = DB::table('tb_karyawan')
                 ->where('NIK', $id)
                 ->first();
+        
+        //Data Golongan
+        $golongan = DB::table('tb_golongan')->get();
 
         return view('karyawan/edit', [
-            'data' => $data
+            'data'      => $data,
+            'golongan'  => $golongan
         ]);
     }
 

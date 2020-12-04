@@ -111,7 +111,8 @@
     <script type="text/javascript">
         $(document).ready(function(){
             $('#tglAbsensi').datepicker({
-                autoclose : true
+                autoclose : true,
+                todayHighlight: true
             });
         })
     </script>

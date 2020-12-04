@@ -114,7 +114,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" style="font-size: 14px;">Rp.</span>
                                 </div>
-                                <input type="text" class="form-control gaji {{ $errors->has('gaji_pokok') ? 'is-invalid' : '' }}" id="gaji_pokok" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="calculateGaji()" name="gaji_pokok" value="{{ $row->gaji_pokok }}">
+                                <input type="text" class="form-control gaji {{ $errors->has('gaji_pokok') ? 'is-invalid' : '' }}" id="gaji_pokok" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="calculateGaji()" name="gaji_pokok" value="{{ $row->gaji_pokok }}" readonly>
                                 @if($errors->has('gaji_pokok'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('gaji_pokok') }}
@@ -162,13 +162,25 @@
                         </fieldset>
                     </div>
 
-                    <div class="form-group">
-                        <label>Tambahan</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" style="font-size: 14px;">Rp.</span>
+                    <div class="form-group row">
+                        <div class="col-lg-6 col-xs-12">
+                            <label>Tambahan</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="font-size: 14px;">Rp.</span>
+                                </div>
+                                <input type="text" class="form-control gaji" id="tambahan" name="tambahan" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="calculateGaji()" value="{{ $row->tambahan }}">
                             </div>
-                            <input type="text" class="form-control gaji" id="tambahan" name="tambahan" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="calculateGaji()" value="{{ $row->tambahan }}">
+                        </div>
+
+                        <div class="col-lg-6 col-xs-12">
+                            <label>Lembur</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="font-size: 14px;">Rp.</span>
+                                </div>
+                                <input type="text" class="form-control gaji" id="lembur" name="lembur" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="calculateGaji()" value="{{ $row->lembur }}" readonly>
+                            </div>
                         </div>
                     </div>
 

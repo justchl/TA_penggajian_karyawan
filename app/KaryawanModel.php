@@ -14,10 +14,10 @@ class KaryawanModel extends Model
 
     protected $fillable = [
         'NIK',
-        'nama_karyawan', 
-        'tempat_lahir', 
-        'tanggal_lahir', 
-        'jenis_kelamin', 
+        'nama_karyawan',
+        'tempat_lahir',
+        'tanggal_lahir',
+        'jenis_kelamin',
         'agama',
         'jabatan',
         'golongan',

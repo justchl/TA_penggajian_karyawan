@@ -113,7 +113,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" style="font-size: 14px;">Rp.</span>
                                 </div>
-                                <input type="text" class="form-control gaji {{ $errors->has('gaji_pokok') ? 'is-invalid' : '' }}" id="gaji_pokok" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="calculateGaji()" name="gaji_pokok" value="0">
+                                <input type="text" class="form-control gaji {{ $errors->has('gaji_pokok') ? 'is-invalid' : '' }}" id="gaji_pokok" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="calculateGaji()" name="gaji_pokok" value="0" readonly>
                                 @if($errors->has('gaji_pokok'))
                                     <div class="invalid-feedback">
                                         {{ $errors->first('gaji_pokok') }}
@@ -160,13 +160,25 @@
                         </fieldset>
                     </div>
 
-                    <div class="form-group">
-                        <label>Tambahan</label>
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text" style="font-size: 14px;">Rp.</span>
+                    <div class="form-group row">
+                        <div class="col-lg-6 col-xs-12">
+                            <label>Tambahan</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="font-size: 14px;">Rp.</span>
+                                </div>
+                                <input type="text" class="form-control gaji" id="tambahan" name="tambahan" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="calculateGaji()" value="0">
                             </div>
-                            <input type="text" class="form-control gaji" id="tambahan" name="tambahan" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="calculateGaji()" value="0">
+                        </div>
+
+                        <div class="col-lg-6 col-xs-12">
+                            <label>Lembur</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" style="font-size: 14px;">Rp.</span>
+                                </div>
+                                <input type="text" class="form-control gaji" id="lembur" name="lembur" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="calculateGaji()" value="0" readonly>
+                            </div>
                         </div>
                     </div>
 
@@ -227,9 +239,10 @@
                         
                         $('#label_nik').html(data[0].NIK);
                         $('#label_nama').html(data[0].nama_karyawan);
-                        $('#label_golongan').html(data[0].golongan);
+                        $('#label_golongan').html(data[0].nama_golongan);
                         $('#label_gender').html(data[0].jenis_kelamin);
                         $('#label_jabatan').html(data[0].jabatan);
+                        $('#gaji_pokok').val(data[0].nilai);
 
                         potonganGaji();
                     }

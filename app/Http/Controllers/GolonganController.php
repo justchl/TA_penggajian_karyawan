@@ -29,11 +29,13 @@ class GolonganController extends Controller
         $this->validate($request, [
             'nama_golongan'  => 'required',
             'gaji_pokok'     => 'required',
+            'masa_kerja'     => 'required'
         ]);
 
         GolonganModel::create([
             'nama_golongan'     => $request->nama_golongan,
             'nilai'             => $request->gaji_pokok,
+            'masa_kerja'        => $request->masa_kerja
         ]);
 
         return redirect('/golongan/tambah')->with('msg_success', 'Data berhasil ditambahkan!');
@@ -51,12 +53,14 @@ class GolonganController extends Controller
         $this->validate($request, [
             'nama_golongan'  => 'required',
             'gaji_pokok'     => 'required',
+            'masa_kerja'     => 'required'
         ]);
 
         $data = GolonganModel::find($id);
         
         $data->nama_golongan = $request->nama_golongan;
         $data->nilai         = $request->gaji_pokok;
+        $data->masa_kerja    = $request->masa_kerja;
         $data->save();
 
         return redirect('/golongan/edit/'.$id)->with('msg_success', 'Data berhasil diupdate!');
