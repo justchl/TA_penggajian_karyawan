@@ -56,6 +56,7 @@
                 <div id="collapseMasterData" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" href="{{ url('/karyawan') }}">Data Karyawan</a>
+                        <a class="collapse-item" href="{{ url('/golongan') }}">Data Golongan</a>
                         <a class="collapse-item" href="{{ url('/tunjangan') }}">Data Tunjangan</a>
                         <a class="collapse-item" href="{{ url('/user') }}">Data User</a>
                     </div>

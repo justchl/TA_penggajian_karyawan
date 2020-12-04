@@ -1,9 +1,9 @@
 @extends('template')
-@section('title', 'Data Tunjangan')
+@section('title', 'Data Golongan')
 @section('content')
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Data Golongan</h1>
-    <p class="mb-4">Berikut list data tunjangan yang terdaftar.</p>
+    <p class="mb-4">Berikut list data golongan yang terdaftar.</p>
 
     <!-- DataTales Example -->
     @if(\Session::has('msg_success'))
@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="col-lg-6 col-xs-12 text-right">
-                <a href="{{ url('tunjangan/tambah') }}"><i class="fa fa-plus"></i> Tambah Data</a>
+                <a href="{{ url('golongan/tambah') }}"><i class="fa fa-plus"></i> Tambah Data</a>
                 </div>
             </div>
         </div>
@@ -40,6 +40,23 @@
                     </thead>
 
                     <tbody>
+                        @php $no=1 @endphp
+                        @foreach ($data as $row)
+                        <tr>
+                            <td>{{ $no++ }}</td>
+                            <td>{{ $row->nama_golongan }}</td>
+                            <td>{{ 'Rp. '.number_format($row->nilai, 0) }}</td>
+                            <td>
+                                <a href="/golongan/edit/{{ $row->id_golongan }}" class="btn btn-primary">
+                                    <i class="fa fa-edit"></i>
+                                </a>
+                            
+                                <a href="/golongan/delete/{{ $row->id_golongan }}" class="btn btn-danger">
+                                    <i class="fa fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
