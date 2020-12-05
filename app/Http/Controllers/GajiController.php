@@ -48,7 +48,19 @@ class GajiController extends Controller
             'success' => true,
             'data'    => $data
         ));
-    }       
+    }    
+    
+    public function detail($id){
+        $data = DB::table('tb_gaji')
+                    ->join('tb_karyawan', 'tb_karyawan.NIK', '=', 'tb_gaji.NIK')
+                    ->join('tb_tunjangan', 'tb_tunjangan.id_tunjangan', '=', 'tb_gaji.tunjangan')
+                    ->where('tb_gaji.id_gaji', $id)
+                    ->first();
+    
+        return view('gaji/detail', [
+            'data' => $data
+        ]);
+    }
 
     public function create(){
         $dataKaryawan  = DB::table('tb_karyawan')->get();
@@ -66,6 +78,7 @@ class GajiController extends Controller
             'gaji_pokok'           => 'required',
             'potongan'             => 'required',
             'tunjangan_pendidikan' => 'required',
+            'tunjangan_jabatan'    => 'required',
             'tambahan'             => 'required',
         ]);
 
@@ -75,6 +88,7 @@ class GajiController extends Controller
             'tanggal'              => Carbon::parse($request->tgl)->format('Y-m-d'),
             'gaji_pokok'           => $request->gaji_pokok,
             'tunjangan_pendidikan' => $request->tunjangan_pendidikan,
+            'tunjangan_struktural' => $request->tunjangan_jabatan,
             'tambahan'             => $request->tambahan,
             'potongan'             => $request->potongan,
             'lembur'               => $request->lembur,
@@ -99,10 +113,10 @@ class GajiController extends Controller
     public function update($id, Request $request){
         $this->validate($request, [
             'nik'                  => 'required',
-            'tgl'                  => 'required|date',
             'gaji_pokok'           => 'required',
             'potongan'             => 'required',
             'tunjangan_pendidikan' => 'required',
+            'tunjangan_jabatan'    => 'required',
             'tambahan'             => 'required',
         ]);
 
@@ -112,6 +126,7 @@ class GajiController extends Controller
         $data->gaji_pokok           = $request->gaji_pokok;
         $data->potongan             = $request->potongan;
         $data->tunjangan_pendidikan = $request->tunjangan_pendidikan;
+        $data->tunjangan_struktural = $request->tunjangan_jabatan;
         $data->tambahan             = $request->tambahan;
         $data->lembur               = $request->lembur;
         $data->total                = $request->total;

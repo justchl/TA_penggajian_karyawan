@@ -18,6 +18,7 @@ class GajiModel extends Model
         'tanggal',
         'gaji_pokok',
         'tunjangan_pendidikan',
+        'tunjangan_struktural',
         'tambahan',
         'potongan',
         'total'

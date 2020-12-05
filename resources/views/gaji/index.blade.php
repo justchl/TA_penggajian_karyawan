@@ -56,6 +56,7 @@
                                     <ul>
                                         <li>{{ $row->nama_tunjangan }} {{ 'Rp. '.number_format($row->nilai_tunjangan) }}</li>
                                         <li>Pendidikan {{ 'Rp. '.number_format($row->tunjangan_pendidikan) }}</li>
+                                        <li>Struktural {{ 'Rp. '.number_format($row->tunjangan_struktural) }}</li>
                                     </ul>
                                 </td>
                                 <td>{{ 'Rp. '.number_format($row->tambahan, 0) }}</td>
@@ -67,6 +68,7 @@
                                           Opsi
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="/gaji/detail/{{ $row->id_gaji }}"><i class="fa fa-eye"></i> Detail</a>
                                             <a class="dropdown-item" href="/gaji/edit/{{ $row->id_gaji }}"><i class="fa fa-edit"></i> Edit</a>
                                             <a class="dropdown-item" href="/gaji/delete/{{ $row->id_gaji }}"><i class="fa fa-trash"></i> Delete</a>
                                         </div>

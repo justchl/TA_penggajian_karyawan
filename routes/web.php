@@ -76,6 +76,7 @@ Route::post('/gaji/post', 'GajiController@store');
 Route::get('/gaji/edit/{id}', 'GajiController@edit');
 Route::put('/gaji/update/{id}', 'GajiController@update');
 Route::get('/gaji/delete/{id}', 'GajiController@delete');
+Route::get('/gaji/detail/{id}', 'GajiController@detail');
 
 Route::get('/get-karyawan/{nik}', 'GajiController@getDataKaryawan');
 Route::get('/get-absensi/{nik}', 'GajiController@getPotongan');

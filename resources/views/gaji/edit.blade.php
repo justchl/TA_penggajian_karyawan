@@ -159,6 +159,16 @@
                                     </div>
                                 @endif
                             </div>
+
+                            <div class="form-group">
+                                <label>Tunj. Jabatan</label>
+                                <input type="text" class="form-control gaji {{ $errors->has('tunjangan_jabatan') ? 'is-invalid' : '' }}" id="t_jabatan" name="tunjangan_jabatan" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="calculateGaji()" value="{{ $row->tunjangan_struktural }}">
+                                @if($errors->has('tunjangan_jabatan'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('tunjangan_jabatan') }}
+                                    </div>
+                                @endif
+                            </div>
                         </fieldset>
                     </div>
 
@@ -255,12 +265,13 @@
             var gaji_pokok           = document.getElementById('gaji_pokok');
             var tunjangan_makan      = document.getElementById('t_makanan');
             var tunjangan_pendidikan = document.getElementById('t_pendidikan');
+            var tunjangan_jabatan    = document.getElementById('t_jabatan');
             var tambahan             = document.getElementById('tambahan');
             var potongan             = document.getElementById('potongan');
             var total                = document.getElementById('total');
             
             if(isNaN){
-                total.value = (parseFloat(gaji_pokok.value) - parseFloat(potongan.value)) + parseFloat(tunjangan_makan.value) + parseFloat(tunjangan_pendidikan.value) + parseFloat(tambahan.value);
+                total.value = (parseFloat(gaji_pokok.value) - parseFloat(potongan.value)) + parseFloat(tunjangan_makan.value) + parseFloat(tunjangan_pendidikan.value) + parseFloat(tunjangan_jabatan.value) + parseFloat(tambahan.value);
             }else{
                 total.value = 0;
             }
