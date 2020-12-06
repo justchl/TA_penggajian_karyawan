@@ -66,7 +66,7 @@
                             <th>Gaji Pokok</th>
                             <th>Tunjangan</th>
                             <th>Total</th>
-                            <th>Aksi</th>
+                            {{-- <th>Aksi</th> --}}
                         </tr>
                     </thead>
 
@@ -80,16 +80,17 @@
                                 <td>{{ 'Rp. '.number_format($row->gaji_pokok, 0) }}</td>
                                 <td>
                                     <ul>
-                                        <li>{{ $row->nama_tunjangan }} {{ 'Rp. '.number_format($row->nilai_tunjangan) }}</li>
+                                        <li>Makan {{ 'Rp. '.number_format($row->tunjangan_makan) }}</li>
                                         <li>Pendidikan {{ 'Rp. '.number_format($row->tunjangan_pendidikan) }}</li>
+                                        <li>Jabatan {{ 'Rp. '.number_format($row->tunjangan_struktural) }}</li>
                                     </ul>
                                 </td>
                                 <td>{{ 'Rp. '.number_format($row->total, 0) }}</td>
-                                <td>
+                                {{-- <td>
                                     <a href="/laporan/detail/{{ $row->id_gaji }}" class="btn btn-primary">
                                         <i class="fa fa-eye"></i>
                                     </a>
-                                </td>
+                                </td> --}}
                             </tr>
                         @endforeach
                     </tbody>
@@ -132,19 +133,20 @@
                                          '<td>'+ no++ +'</td>'+
                                          '<td>'+ data[i].nama_karyawan +'</td>'+
                                          '<td>'+ data[i].tanggal +'</td>'+
-                                         '<td>'+ data[i].gaji_pokok +'</td>'+
+                                         '<td>'+ formatCurrency(data[i].gaji_pokok) +'</td>'+
                                          '<td>'+
                                             '<ul>'+
-                                                '<li>'+ data[i].nama_tunjangan +' '+ data[i].nilai_tunjangan +'</li>'+
-                                                '<li>Pendidikan '+ data[i].tunjangan_pendidikan +'</li>'+
+                                                '<li>Makan '+ formatCurrency(data[i].tunjangan_makan,0) +'</li>'+
+                                                '<li>Pendidikan '+ formatCurrency(data[i].tunjangan_pendidikan,0) +'</li>'+
+                                                '<li>Jabatan '+ formatCurrency(data[i].tunjangan_struktural,0) +'</li>'+
                                             '</ul>'+
                                          '</td>'+
-                                         '<td>'+ data[i].total +'</td>'+
-                                         '<td>'+
-                                            '<a href="/laporan/detail/'+ data[i].id_gaji +'" class="btn btn-primary">'+
-                                                '<i class="fa fa-eye"></i>'+
-                                            '</a>'+
-                                         '</td>'+
+                                         '<td>'+ formatCurrency(data[i].total) +'</td>'+
+                                        //  '<td>'+
+                                        //     '<a href="/laporan/detail/'+ data[i].id_gaji +'" class="btn btn-primary">'+
+                                        //         '<i class="fa fa-eye"></i>'+
+                                        //     '</a>'+
+                                        //  '</td>'+
                                          '</tr>';
                         }
 
@@ -159,5 +161,10 @@
                 });
             });
         });
+
+        function formatCurrency(data){
+            let val = (data/1).toFixed(0).replace('.')
+		    return 'Rp. '+val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        }
     </script>
 @endsection

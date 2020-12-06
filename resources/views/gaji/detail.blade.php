@@ -35,38 +35,123 @@
             </div>
         </div>
 
-        <div class="col-lg-5 col-sm-6 col-md-6 col-xs-12 mt-3">
-            {{-- <div class="float-left">
-                <a href="{{ url('/laporan') }}" class="btn btn-info"><i class="fa fa-arrow-left"></i> Kembali</a>
+        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 mt-3">
+            <div class="float-left res-mediaPrint">
+                <a href="{{ url('/gaji') }}" class="btn btn-info"><i class="fa fa-arrow-left"></i> Kembali</a>
             </div>
 
             <div class="text-right res-mediaPrint mb-3">
                 <a href="javascript:void(0)" id="printNow" class="btn btn-success">Print <i class="ml-1 fa fa-print"></i></a>
-            </div> --}}
+            </div>
             
-            <div class="card">
-                <div class="card-header d-block text-center">
-                    <h4>Slip Gaji</h4>
+            <div class="card slip-gaji">
+                <div class="card-header pb-0 d-block text-center">
+                    <h6>Slip Gaji</h6>
                 </div>
 
                 <div class="card-body">
-                    <table class="table">
-                        <tr>
-                            <td>Nama</td>
-                            <td>:</td>
-                            <td>{{ $data->nama_karyawan }}</td>
-                        </tr>
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                            <h6 class="text-capitalize">Institut teknologi<br> dan kesehatan bali</h6>
+                            <p>Jl. Tukad Balian No.180,<br> Renon, Kec. Denpasar Sel,<br>Kota Denpasar, <br>Bali 80227</p>
+                        </div>
 
-                        <tr>
-                            <td>Gaji Pokok</td>
-                            <td>:</td>
-                            <td>{{ 'Rp. '.number_format($data->gaji_pokok,0) }}</td>
-                        </tr>
+                        <div class="col-lg-6 col-sm-6 col-md-6 col-xs-6">
+                            <table class="table">   
+                                <tr>
+                                    <td>Periode</td>
+                                    <td>:</td>
+                                    <td>{{ Carbon\Carbon::parse($data->tanggal)->format('M Y') }}</td>
+                                </tr>
 
+                                <tr>
+                                    <td>Nama</td>
+                                    <td>:</td>
+                                    <td>{{ $data->nama_karyawan }}</td>
+                                </tr>
+        
+                                <tr>
+                                    <td>Jabatan</td>
+                                    <td>:</td>
+                                    <td>{{ $data->jabatan }}</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td>Status</td>
+                                    <td>:</td>
+                                    <td>{{ $data->status_kerja }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <hr class="mt-0">
+
+                    <div class="wrap-grey">
+                        <table class="table m-0">
+                            <tr>
+                                <td>Golongan</td>
+                                <td class="text-right">{{ $data->nama_golongan }}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Masa Kerja</td>
+                                <td class="text-right">{{ $data->masa_kerja }} Bulan</td>
+                            </tr>
+    
+                            <tr>
+                                <td>Gaji Pokok</td>
+                                <td class="text-right">{{ 'Rp. '.number_format($data->gaji_pokok,0) }}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="wrap-grey">
+                        <h6>Tunjangan</h6>
+                        <hr>
+                        <table class="table m-0">
+                            <tr>
+                                <td>Makan</td>
+                                <td class="text-right">{{ 'Rp. '.number_format($data->tunjangan_makan,0) }}</td>
+                            </tr>
+    
+                            <tr>
+                                <td>Pendidikan</td>
+                                <td class="text-right">{{ 'Rp. '.number_format($data->tunjangan_pendidikan,0) }}</td>
+                            </tr>
+    
+                            <tr>
+                                <td>Jabatan</td>
+                                <td class="text-right">{{ 'Rp. '.number_format($data->tunjangan_struktural,0) }}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="wrap-grey">
+                        <table class="table m-0">
+                            <tr>
+                                <td>Potongan</td>
+                                <td class="text-right">{{ 'Rp. '.number_format($data->potongan,0) }}</td>
+                            </tr>
+    
+                            <tr>
+                                <td>Lembur (1 Jam x 15000)</td>
+                                <td class="text-right">{{ 'Rp. '.number_format($data->lembur,0) }}</td>
+                            </tr>
+    
+                            <tr>
+                                <td>Tambahan</td>
+                                <td class="text-right">{{ 'Rp. '.number_format($data->tambahan,0) }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <table class="table m-0">
                         <tr>
-                            <td>Bulan</td>
-                            <td>:</td>
-                            <td>{{ $data->tanggal }}</td>
+                            <td class="font-weight-bold text-uppercase">total diterima karyawan</td>
+                            <td class="font-weight-bold text-right">{{ 'Rp. '.number_format($data->total,0) }}</td>
                         </tr>
                     </table>
                 </div>
@@ -74,7 +159,7 @@
 
             <div class="row justify-content-end mt-3">
                 <div class="col-lg-6 col-md-6 col-sm-6 text-center">
-                    <p>Denpasar, 1 Desember 2020</br>Ka/Sie Keuangan</p>
+                    <p>Denpasar, {{ date('d M Y') }}</br>Ka/Sie Keuangan</p>
                     </br>
                     </br>
                     <p>Ida Ayu Astuti, SE</br>NIR 83003</p>

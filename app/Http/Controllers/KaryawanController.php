@@ -199,6 +199,7 @@ class KaryawanController extends Controller
 
     public function detail($id){
         $data = DB::table('tb_karyawan')
+                ->join('tb_golongan', 'tb_karyawan.golongan','=','tb_golongan.id_golongan')
                 ->where('NIK', $id)
                 ->first();
         

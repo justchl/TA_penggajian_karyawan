@@ -35,17 +35,24 @@ class AbsensiController extends Controller
     }
 
     public function uploadFile(Request $request){
-        // $this->validate($request, [
-        //     'file' => 'required|mimes:xls,xlxs'
-        // ]);
+        try {
+            //code...
+            $this->validate($request, [
+                'file' => 'required|mimes:xls,xlxs'
+            ]);
+    
+            if ($request->hasFile('file')) {
+                $file = $request->file('file'); //GET FILE
+                Excel::import(new AbsensiImport, $file); //IMPORT FILE 
+                
+                return redirect('/absensi')->with(['msg_success' => 'File berhasil diupload!']);
+            }
+            return redirect('/absensi')->with(['msg_error' => 'Silahkan upload file terlebih dahulu!']);
 
-        if ($request->hasFile('file')) {
-            $file = $request->file('file'); //GET FILE
-            Excel::import(new AbsensiImport, $file); //IMPORT FILE 
-            
-            return redirect('/absensi')->with(['msg_success' => 'File berhasil diupload!']);
+        } catch (\Throwable $th) {
+            //throw $th;
+            return redirect('/absensi')->with('msg_error', 'Gagal import data!');
         }
-        return redirect('/absensi')->with(['msg_error' => 'Silahkan upload file terlebih dahulu!']);
     }
 
     public function store(Request $request){

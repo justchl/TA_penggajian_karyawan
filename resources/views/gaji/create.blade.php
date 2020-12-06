@@ -14,6 +14,15 @@
         </div>
     @endif
 
+    @if(\Session::has('msg_error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <span class="mr-1"><i class="fa fa-check-circle"></i></span> {{ Session::get('msg_error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
+
     <form class="form-gaji" action="{{ url('gaji/post') }}" method="post" autocomplete="off">
     {{ csrf_field() }}
     <div class="row">
@@ -140,12 +149,21 @@
                         <fieldset class="tunjangan-fieldset">
                             <legend>Tunjangan <span class="text-danger">*</span></legend>
                             
-                            <div class="form-group">
+                            {{-- <div class="form-group">
                                 <label>Tunj. Makan</label>
                                 <a href="{{ url('tunjangan/edit/'.$dataTunjangan->id_tunjangan) }}" class="float-right"><i class="fa fa-pencil-alt" style="font-size: 12px;"></i> Edit Tunjangan</a>
                                 <input type="hidden" class="form-control" name="id_tunjangan" value="{{ $dataTunjangan->id_tunjangan }}">
                                 <input type="hidden" class="form-control" id="t_makanan" name="tunjangan_makan" value="{{ $dataTunjangan->nilai_tunjangan }}">
                                 <input type="text" class="form-control" value="{{ 'Rp. '.number_format($dataTunjangan->nilai_tunjangan, 0) }}" readonly>
+                            </div> --}}
+                            <div class="form-group">
+                                <label>Tunj. Makan</label>
+                                <input type="text" class="form-control gaji {{ $errors->has('tunjangan_makan') ? 'is-invalid' : '' }}" id="t_makan" name="tunjangan_makan" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="calculateGaji()" value="0">
+                                @if($errors->has('tunjangan_makan'))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first('tunjangan_makan') }}
+                                    </div>
+                                @endif
                             </div>
 
                             <div class="form-group">
@@ -187,7 +205,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text" style="font-size: 14px;">Rp.</span>
                                 </div>
-                                <input type="text" class="form-control gaji" id="lembur" name="lembur" onkeypress="return /[0-9]/i.test(event.key)" onkeyup="calculateGaji()" value="0" readonly>
+                                <input type="text" class="form-control gaji" id="lembur" name="lembur" onkeypress="return /[0-9]/i.test(event.key)" value="0" readonly>
                             </div>
                         </div>
                     </div>
@@ -246,6 +264,7 @@
                     url : '/get-karyawan/'+value,
                     success : function(res){
                         var data = res.data;
+                        var tunjangan = res.tunjangan;
                         
                         $('#label_nik').html(data[0].NIK);
                         $('#label_nama').html(data[0].nama_karyawan);
@@ -253,8 +272,11 @@
                         $('#label_gender').html(data[0].jenis_kelamin);
                         $('#label_jabatan').html(data[0].jabatan);
                         $('#gaji_pokok').val(data[0].nilai);
-
-                        potonganGaji();
+                        $('#t_makan').val(tunjangan[0].nilai_tunjangan)
+                        $('#t_pendidikan').val(tunjangan[1].nilai_tunjangan)
+                        $('#t_jabatan').val(tunjangan[2].nilai_tunjangan)
+                        
+                        calculateGaji();
                     }
                 })
             });
@@ -262,24 +284,18 @@
 
         function calculateGaji(){
             var gaji_pokok           = document.getElementById('gaji_pokok');
-            var tunjangan_makan      = document.getElementById('t_makanan');
+            var tunjangan_makan      = document.getElementById('t_makan');
             var tunjangan_pendidikan = document.getElementById('t_pendidikan');
-            var tunjangan_golongan   = document.getElementById('t_golongan');
+            var tunjangan_jabatan    = document.getElementById('t_jabatan');
             var tambahan             = document.getElementById('tambahan');
             var potongan             = document.getElementById('potongan');
+            var lembur               = document.getElementById('lembur');
             var total                = document.getElementById('total');
-            
-            if(isNaN){
-                total.value = (parseFloat(gaji_pokok.value) - parseFloat(potongan.value)) + parseFloat(tunjangan_makan.value) + parseFloat(tunjangan_pendidikan.value) + parseFloat(tunjangan_golongan.value) + parseFloat(tambahan.value);
-            }else{
-                total.value = 0;
-            }
-        }
 
-        function potonganGaji(){
             $('#potongan').val(0);
+            $('#lembur').val(0);
             var nik = $('#nik').val();
-            var tunjanganMakan = $('#t_makanan').val();
+            var tunjanganMakan = $('#t_makan').val();
 
             $.ajax({
                 type : 'GET',
@@ -287,16 +303,106 @@
                 success : function(res){
                     if(res.data.length == 0){
                         $('#potongan').val(0);
-                        $('#infoPotongan').removeClass('d-block').addClass('d-none'); 
+                        $('#infoPotongan').removeClass('d-block').addClass('d-none');
+
+                        if(isNaN){
+                            total.value = (parseFloat(gaji_pokok.value) - parseFloat(potongan.value)) + parseFloat(tunjangan_makan.value) + parseFloat(tunjangan_pendidikan.value) + parseFloat(tunjangan_jabatan.value) + parseFloat(tambahan.value) + parseFloat(lembur.value);
+                        }else{
+                            total.value = 0;
+                        }
                     }else{
                         var totalPotongan = tunjanganMakan * 0.5;
                         $('#potongan').val(totalPotongan);
-
                         $('#infoPotongan').removeClass('d-none').addClass('d-block');
+
+                        if(isNaN){
+                            total.value = (parseFloat(gaji_pokok.value) - parseFloat(totalPotongan)) + parseFloat(tunjangan_makan.value) + parseFloat(tunjangan_pendidikan.value) + parseFloat(tunjangan_jabatan.value) + parseFloat(tambahan.value) + parseFloat(lembur.value);
+                        }else{
+                            total.value = 0;
+                        }
                     }
+
+                    $.ajax({
+                        type : 'GET',
+                        url : '/get-lembur/'+nik,
+                        success : function(res){
+                            var data = res.data;
+                            var masuk  = data[0].masuk;
+                            var pulang = data[0].pulang;
+
+                            var str_time_masuk  = masuk.split(':');
+                            var str_time_pulang = pulang.split(':') ;
+
+                            //Get Second
+                            var sec_start = str_time_masuk[0]*3600+str_time_masuk[1]*60+str_time_masuk[2]*1;
+                            var sec_end = str_time_pulang[0]*3600+str_time_pulang[1]*60+str_time_pulang[2]*1;
+
+                            var timeDiff = sec_end - sec_start;
+                            var diffHours = Math.ceil(timeDiff / (60 * 60));
+
+                            var totalLembur = diffHours * 15000;
+                            $('#lembur').val(totalLembur);
+
+                            if(isNaN){
+                                total.value = (parseFloat(gaji_pokok.value) - parseFloat(potongan.value)) + parseFloat(tunjangan_makan.value) + parseFloat(tunjangan_pendidikan.value) + parseFloat(tunjangan_jabatan.value) + parseFloat(tambahan.value) + parseFloat(lembur.value);
+                            }else{
+                                total.value = 0;
+                            }
+                        }
+                    })
                 }
             })
         }
+
+        // function checkLembur(){
+        //     var nik     = $('#nik').val();
+        //     var lembur  = $('#lembur').val();
+
+        //     $.ajax({
+        //         type : 'GET',
+        //         url : '/get-lembur/'+nik,
+        //         success : function(res){
+        //             var data = res.data;
+        //             var masuk  = data[0].masuk;
+        //             var pulang = data[0].pulang;
+
+        //             var str_time_masuk  = masuk.split(':');
+        //             var str_time_pulang = pulang.split(':') ;
+
+        //             //Get Second
+        //             var sec_start = str_time_masuk[0]*3600+str_time_masuk[1]*60+str_time_masuk[2]*1;
+        //             var sec_end = str_time_pulang[0]*3600+str_time_pulang[1]*60+str_time_pulang[2]*1;
+
+        //             var timeDiff = sec_end - sec_start;
+        //             var diffHours = Math.ceil(timeDiff / (60 * 60));
+
+        //             var totalLembur = diffHours * 15000;
+        //             $('#lembur').val(totalLembur);
+        //         }
+        //     })
+        // }
+
+        // function potonganGaji(){
+        //     $('#potongan').val(0);
+        //     var nik = $('#nik').val();
+        //     var tunjanganMakan = $('#t_makan').val();
+
+        //     $.ajax({
+        //         type : 'GET',
+        //         url : '/get-absensi/'+nik,
+        //         success : function(res){
+        //             if(res.data.length == 0){
+        //                 $('#potongan').val(0);
+        //                 $('#infoPotongan').removeClass('d-block').addClass('d-none'); 
+        //             }else{
+        //                 var totalPotongan = tunjanganMakan * 0.5;
+        //                 $('#potongan').val(totalPotongan);
+
+        //                 $('#infoPotongan').removeClass('d-none').addClass('d-block');
+        //             }
+        //         }
+        //     })
+        // }
     </script>
 @endsection
 

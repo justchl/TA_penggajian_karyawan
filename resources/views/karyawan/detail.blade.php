@@ -65,7 +65,7 @@
                         <tr>
                             <td class="font-weight-bold">Golongan</td>
                             <td>:</td>
-                            <td>{{ $data->golongan }}</td>
+                            <td>{{ $data->nama_golongan }}</td>
                         </tr>
 
                         <tr>

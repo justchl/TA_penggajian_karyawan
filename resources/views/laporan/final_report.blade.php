@@ -22,7 +22,7 @@
     <link href="{{ url('assets/vendor/datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
 </head>
 <body>
-<div class="container">
+<div class="container-fluid">
     <div class="row justify-content-center">
         <div class="col-lg-12 col-xs-12">
             <div class="header-report">
@@ -51,20 +51,22 @@
                     <thead>
                         <thead>
                             <tr>
-                            <th rowspan="2">No</th>
-                            <th rowspan="2">Nama</th>
-                            <th rowspan="2">Jabatan</th>
-                            <th rowspan="2">Masa Kerja</th>
-                            <th rowspan="2">Pangkat<br>Golongan</th>
-                            <th rowspan="2">Pendidikan</th>
-                            <th rowspan="2">Gaji Pokok</th>
-                            <th colspan="4">Tunjangan</th>
+                                <th rowspan="2">No</th>
+                                <th rowspan="2">Nama</th>
+                                <th rowspan="2">Jabatan</th>
+                                <th rowspan="2">Masa Kerja</th>
+                                <th rowspan="2">Pangkat<br>Golongan</th>
+                                <th rowspan="2">Pendidikan</th>
+                                <th rowspan="2">Gaji Pokok</th>
+                                <th colspan="3">Tunjangan</th>
+                                <th rowspan="2">Potongan</th>
+                                <th rowspan="2">Lembur</th>
+                                <th rowspan="2">Total</th>
                             </tr>
                             <tr>
-                            <td>Strukt</td>
-                            <td>T.Pendidikan</td>
-                            <td>Uang Makan</td>
-                            <td>Total</td>
+                                <td>Strukt</td>
+                                <td>T.Pendidikan</td>
+                                <td>Uang Makan</td>
                             </tr>
                         </thead>
                     </thead>
@@ -80,9 +82,11 @@
                                 <td>{{ $row->nama_golongan }}</td>
                                 <td>{{ $row->pendidikan }}</td>
                                 <td>{{ 'Rp. '.number_format($row->gaji_pokok, 0) }}</td>
-                                <td>{{ 'Rp. '.number_format($row->tunjangan_pendidikan + $row->nilai_tunjangan,0) }}</td>
+                                <td>{{ 'Rp. '.number_format($row->tunjangan_struktural,0) }}</td>
                                 <td>{{ 'Rp. '.number_format($row->tunjangan_pendidikan, 0) }}</td>
-                                <td>{{ 'Rp. '.number_format($row->nilai_tunjangan, 0) }}</td>
+                                <td>{{ 'Rp. '.number_format($row->tunjangan_makan, 0) }}</td>
+                                <td>{{ 'Rp. '.number_format($row->potongan, 0) }}</td>
+                                <td>{{ 'Rp. '.number_format($row->lembur, 0) }}</td>
                                 <td>{{ 'Rp. '.number_format($row->total, 0) }}</td>
                             </tr>
                         @endforeach
@@ -90,9 +94,11 @@
                         <tr>
                             <td colspan="6" class="font-weight-bold">Jumlah</td>
                             <td class="font-weight-bold">{{ 'Rp. '.number_format($totalGapok, 0) }}</td>
-                            <td class="font-weight-bold">{{ 'Rp. '.number_format($totalTunjMakan+$totalTunjPendidikan,0) }}</td>
+                            <td class="font-weight-bold">{{ 'Rp. '.number_format($totalTunjJabatan,0) }}</td>
                             <td class="font-weight-bold">{{ 'Rp. '.number_format($totalTunjPendidikan, 0) }}</td>
                             <td class="font-weight-bold">{{ 'Rp. '.number_format($totalTunjMakan, 0) }}</td>
+                            <td class="font-weight-bold">{{ 'Rp. '.number_format($totalPotongan, 0) }}</td>
+                            <td class="font-weight-bold">{{ 'Rp. '.number_format($totalLembur, 0) }}</td>
                             <td class="font-weight-bold">{{ 'Rp. '.number_format($grandTotal, 0) }}</td>
                         </tr>
                     </tbody>

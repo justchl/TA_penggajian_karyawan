@@ -14,7 +14,7 @@ class GajiModel extends Model
 
     protected $fillable = [
         'NIK',
-        'tunjangan',
+        'tunjangan_makan',
         'tanggal',
         'gaji_pokok',
         'tunjangan_pendidikan',

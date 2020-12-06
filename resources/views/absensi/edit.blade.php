@@ -42,7 +42,7 @@
 
                         <div class="form-group">
                             <label>Tanggal <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control {{ $errors->has('tanggal') ? 'is-invalid' : '' }}" id="tglAbsensi" name="tanggal" value="{{ date('d/m/Y', strtotime($row->tanggal)) }}">
+                            <input type="text" class="form-control {{ $errors->has('tanggal') ? 'is-invalid' : '' }}" id="tglAbsensi" name="tanggal" value="{{ date('m/d/Y', strtotime($row->tanggal)) }}">
                             @if($errors->has('tanggal'))
                                 <div class="invalid-feedback">
                                     {{ $errors->first('tanggal') }}

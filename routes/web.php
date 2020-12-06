@@ -80,10 +80,11 @@ Route::get('/gaji/detail/{id}', 'GajiController@detail');
 
 Route::get('/get-karyawan/{nik}', 'GajiController@getDataKaryawan');
 Route::get('/get-absensi/{nik}', 'GajiController@getPotongan');
+Route::get('/get-lembur/{nik}', 'GajiController@getLembur');
 
 //Laporan
-Route::get('/laporan', 'laporanController@index');
-Route::get('/laporan/detail/{id}', 'laporanController@detail');
-Route::get('/laporan/cetak', 'laporanController@printReport');
-Route::post('/laporan/filter', 'laporanController@filterData');
+Route::get('/laporan', 'LaporanController@index');
+Route::get('/laporan/detail/{id}', 'LaporanController@detail');
+Route::get('/laporan/cetak', 'LaporanController@printReport');
+Route::post('/laporan/filter', 'LaporanController@filterData');
 

@@ -22,7 +22,6 @@ class DashboardController extends Controller
         $summary = DB::table('tb_gaji')
                 ->select(DB::raw('sum(tb_gaji.total) as grand_total'))
                 ->join('tb_karyawan', 'tb_gaji.NIK', '=', 'tb_karyawan.NIK')
-                ->join('tb_tunjangan', 'tb_gaji.tunjangan', '=', 'tb_tunjangan.id_tunjangan')
                 ->whereMonth('tanggal', $formated)
                 ->whereYear('tanggal', $dateNow->format('Y'))
                 ->first();
@@ -60,7 +59,6 @@ class DashboardController extends Controller
         $data = DB::table('tb_gaji')
                 ->select(DB::raw('sum(total) as total_gaji, MONTH(tanggal) as bulan'))
                 ->join('tb_karyawan', 'tb_gaji.NIK', '=', 'tb_karyawan.NIK')
-                ->join('tb_tunjangan', 'tb_gaji.tunjangan', '=', 'tb_tunjangan.id_tunjangan')
                 ->groupBy('bulan')
                 ->get();
 

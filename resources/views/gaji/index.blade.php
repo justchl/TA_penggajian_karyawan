@@ -54,7 +54,7 @@
                                 <td>{{ 'Rp. '.number_format($row->gaji_pokok, 0) }}</td>
                                 <td>
                                     <ul>
-                                        <li>{{ $row->nama_tunjangan }} {{ 'Rp. '.number_format($row->nilai_tunjangan) }}</li>
+                                        <li>Makan {{ 'Rp. '.number_format($row->tunjangan_makan) }}</li>
                                         <li>Pendidikan {{ 'Rp. '.number_format($row->tunjangan_pendidikan) }}</li>
                                         <li>Struktural {{ 'Rp. '.number_format($row->tunjangan_struktural) }}</li>
                                     </ul>

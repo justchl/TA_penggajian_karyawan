@@ -20,7 +20,7 @@
                   <th colspan="4">Tunjangan</th>
                 </tr>
                 <tr>
-                  <td>Strukt</td>
+                  <td>Struktural</td>
                   <td>T.Pendidikan</td>
                   <td>Uang Makan</td>
                   <td>Total</td>
@@ -39,7 +39,7 @@
                     <td>{{ $row->nama_golongan }}</td>
                     <td>{{ $row->pendidikan }}</td>
                     <td>{{ 'Rp. '.number_format($row->gaji_pokok, 0) }}</td>
-                    <td>{{ 'Rp. '.number_format($row->tunjangan_pendidikan + $row->nilai_tunjangan,0) }}</td>
+                    <td>{{ 'Rp. '.number_format($row->tunjangan_struktural,0) }}</td>
                     <td>{{ 'Rp. '.number_format($row->tunjangan_pendidikan, 0) }}</td>
                     <td>{{ 'Rp. '.number_format($row->nilai_tunjangan, 0) }}</td>
                     <td>{{ 'Rp. '.number_format($row->total, 0) }}</td>
@@ -48,7 +48,7 @@
                 <tr>
                     <td colspan="6" class="font-weight-bold">Jumlah</td>
                     <td class="font-weight-bold">{{ 'Rp. '.number_format($row->gaji_pokok, 0) }}</td>
-                    <td class="font-weight-bold">{{ 'Rp. '.number_format($row->tunjangan_pendidikan + $row->nilai_tunjangan,0) }}</td>
+                    <td class="font-weight-bold">{{ 'Rp. '.number_format($row->tunjangan_struktural,0) }}</td>
                     <td class="font-weight-bold">{{ 'Rp. '.number_format($row->tunjangan_pendidikan, 0) }}</td>
                     <td class="font-weight-bold">{{ 'Rp. '.number_format($row->nilai_tunjangan, 0) }}</td>
                     <td class="font-weight-bold">{{ 'Rp. '.number_format($row->total, 0) }}</td>

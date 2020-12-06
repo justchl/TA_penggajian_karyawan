@@ -131,3 +131,39 @@
     }
 }
 /* End */
+
+/* Slip Gaji */
+.slip-gaji .card-header, .slip-gaji .card-footer{
+    background: none;
+    border: 0;
+}
+
+.slip-gaji .card-header h6{
+    font-size: 18px;
+    margin: 8px 0 0 0;
+}
+
+.slip-gaji .card-body{
+    padding: 0 1rem;
+}
+
+.slip-gaji .wrap-grey{
+    background: #f4f4f4;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.slip-gaji .wrap-grey p{
+    margin-bottom: 0;
+}
+
+.slip-gaji .wrap-grey:last-child{
+    margin: 0;
+}
+
+.slip-gaji .table tr td{
+    border:0;
+    padding: 3px;
+}
+/* End */

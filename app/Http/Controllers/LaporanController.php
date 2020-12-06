@@ -15,7 +15,6 @@ class LaporanController extends Controller
 
         $data = DB::table('tb_gaji')
                 ->join('tb_karyawan', 'tb_gaji.NIK', '=', 'tb_karyawan.NIK')
-                ->join('tb_tunjangan', 'tb_gaji.tunjangan', '=', 'tb_tunjangan.id_tunjangan')
                 ->whereMonth('tanggal', $formated)
                 ->whereYear('tanggal', $dateNow->format('Y'))
                 ->get();
@@ -35,7 +34,6 @@ class LaporanController extends Controller
         $data = DB::table('tb_gaji')
                 ->join('tb_karyawan', 'tb_gaji.NIK', '=', 'tb_karyawan.NIK')
                 ->join('tb_golongan','tb_karyawan.golongan','=','tb_golongan.id_golongan')
-                ->join('tb_tunjangan', 'tb_gaji.tunjangan', '=', 'tb_tunjangan.id_tunjangan')
                 ->where('tb_gaji.id_gaji', $id)
                 ->get();
         
@@ -66,21 +64,17 @@ class LaporanController extends Controller
         $data = DB::table('tb_gaji')
                 ->join('tb_karyawan', 'tb_gaji.NIK', '=', 'tb_karyawan.NIK')
                 ->join('tb_golongan','tb_karyawan.golongan','=','tb_golongan.id_golongan')
-                ->join('tb_tunjangan', 'tb_gaji.tunjangan', '=', 'tb_tunjangan.id_tunjangan')
                 ->whereMonth('tanggal', $month)
                 ->whereYear('tanggal', $year)
                 ->get();
 
         $summary = DB::table('tb_gaji')
-                ->select(DB::raw('sum(tb_gaji.gaji_pokok) as total_gaji_pokok, sum(tb_gaji.total) as grand_total, sum(tb_tunjangan.nilai_tunjangan) as tunjangan_makan, sum(tb_gaji.tunjangan_pendidikan) as tunjangan_pendidikan'))
+                ->select(DB::raw('sum(tb_gaji.gaji_pokok) as total_gaji_pokok, sum(tb_gaji.total) as grand_total, sum(tb_gaji.tunjangan_makan) as tunjangan_makan, sum(tb_gaji.tunjangan_pendidikan) as tunjangan_pendidikan, sum(tb_gaji.tunjangan_struktural) as tunjangan_jabatan, sum(tb_gaji.potongan) as potongan, sum(tb_gaji.lembur) as lembur, sum(tb_gaji.tambahan) as tambahan'))
                 ->join('tb_karyawan', 'tb_gaji.NIK', '=', 'tb_karyawan.NIK')
                 ->join('tb_golongan','tb_karyawan.golongan','=','tb_golongan.id_golongan')
-                ->join('tb_tunjangan', 'tb_gaji.tunjangan', '=', 'tb_tunjangan.id_tunjangan')
                 ->whereMonth('tanggal', $month)
                 ->whereYear('tanggal', $year)
                 ->first();
-
-        // dd($summary);
         
         return view('laporan/final_report', [
             'data'  => $data,
@@ -89,7 +83,11 @@ class LaporanController extends Controller
             'totalGapok' => $summary->total_gaji_pokok,
             'grandTotal' => $summary->grand_total,
             'totalTunjMakan' => $summary->tunjangan_makan,
-            'totalTunjPendidikan' => $summary->tunjangan_pendidikan
+            'totalTunjPendidikan' => $summary->tunjangan_pendidikan,
+            'totalTunjJabatan' => $summary->tunjangan_jabatan,
+            'totalPotongan' => $summary->potongan,
+            'totalLembur' => $summary->lembur,
+            'totalTambahan' => $summary->tambahan
         ]);
     }
 
