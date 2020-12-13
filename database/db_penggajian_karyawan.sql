@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 03 Des 2020 pada 17.08
+-- Waktu pembuatan: 11 Des 2020 pada 14.04
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.2.33
 
@@ -37,6 +37,13 @@ CREATE TABLE `tb_absensi` (
   `keterangan` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `tb_absensi`
+--
+
+INSERT INTO `tb_absensi` (`id_absensi`, `NIK`, `status_kehadiran`, `tanggal`, `masuk`, `pulang`, `keterangan`) VALUES
+(12, '00035', 'Hadir', '2020-12-06', '07:00:00', '16:35:00', 'hadir');
+
 -- --------------------------------------------------------
 
 --
@@ -46,15 +53,23 @@ CREATE TABLE `tb_absensi` (
 CREATE TABLE `tb_gaji` (
   `id_gaji` int(11) NOT NULL,
   `NIK` varchar(20) NOT NULL,
-  `tunjangan` int(11) NOT NULL,
+  `tunjangan_makan` varchar(30) NOT NULL,
   `tanggal` date NOT NULL,
   `gaji_pokok` varchar(30) NOT NULL,
   `tunjangan_pendidikan` varchar(50) NOT NULL,
+  `tunjangan_struktural` varchar(50) NOT NULL,
   `tambahan` varchar(30) NOT NULL,
   `potongan` varchar(30) NOT NULL,
-  `lembur` varchar(30) NOT NULL,
+  `lembur` varchar(30) DEFAULT NULL,
   `total` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_gaji`
+--
+
+INSERT INTO `tb_gaji` (`id_gaji`, `NIK`, `tunjangan_makan`, `tanggal`, `gaji_pokok`, `tunjangan_pendidikan`, `tunjangan_struktural`, `tambahan`, `potongan`, `lembur`, `total`) VALUES
+(5, '00035', '550000', '2020-12-07', '3850000', '1000000', '500000', '120000', '0', '150000', '6170000');
 
 -- --------------------------------------------------------
 
@@ -65,8 +80,19 @@ CREATE TABLE `tb_gaji` (
 CREATE TABLE `tb_golongan` (
   `id_golongan` int(11) NOT NULL,
   `nama_golongan` varchar(40) NOT NULL,
-  `nilai` varchar(30) NOT NULL
+  `nilai` varchar(30) NOT NULL,
+  `masa_kerja` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_golongan`
+--
+
+INSERT INTO `tb_golongan` (`id_golongan`, `nama_golongan`, `nilai`, `masa_kerja`) VALUES
+(1, 'Penata Muda TK I/III b', '2700000', '7'),
+(2, 'Penata Muda/II a', '2700000', '4'),
+(3, 'Penata I/ IVa Lektor', '3850000', '12'),
+(4, 'Pentata Tk I/ III d Lektor', '3500000', '17');
 
 -- --------------------------------------------------------
 
@@ -88,11 +114,17 @@ CREATE TABLE `tb_karyawan` (
   `alamat` text DEFAULT NULL,
   `status_pernikahan` varchar(20) DEFAULT NULL,
   `status_kerja` varchar(20) DEFAULT NULL,
-  `masa_kerja` int(11) NOT NULL,
   `foto` text DEFAULT NULL,
   `id_sidik_jari` varchar(20) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_karyawan`
+--
+
+INSERT INTO `tb_karyawan` (`NIK`, `nama_karyawan`, `tempat_lahir`, `tanggal_lahir`, `jenis_kelamin`, `agama`, `jabatan`, `golongan`, `pendidikan`, `no_telp`, `alamat`, `status_pernikahan`, `status_kerja`, `foto`, `id_sidik_jari`, `id_user`) VALUES
+('00035', 'yudis', 'denpasar', '1998-07-26', 'Laki-laki', 'Hindu', 'Rektor', 3, 'S3', '0361460224', 'jalan ratih no 11, sedang, abiansemal, badung bali', 'Kawin', 'Tetap', NULL, '001', 1);
 
 -- --------------------------------------------------------
 
@@ -131,7 +163,9 @@ CREATE TABLE `tb_tunjangan` (
 --
 
 INSERT INTO `tb_tunjangan` (`id_tunjangan`, `nama_tunjangan`, `nilai_tunjangan`) VALUES
-(3, 'Uang Makan', '550000');
+(3, 'Uang Makan', '550000'),
+(4, 'Pendidikan', '1000000'),
+(5, 'Jabatan', '500000');
 
 -- --------------------------------------------------------
 
@@ -172,8 +206,7 @@ ALTER TABLE `tb_absensi`
 --
 ALTER TABLE `tb_gaji`
   ADD PRIMARY KEY (`id_gaji`),
-  ADD KEY `NIK` (`NIK`),
-  ADD KEY `tunjangan` (`tunjangan`);
+  ADD KEY `NIK` (`NIK`);
 
 --
 -- Indeks untuk tabel `tb_golongan`
@@ -186,7 +219,6 @@ ALTER TABLE `tb_golongan`
 --
 ALTER TABLE `tb_karyawan`
   ADD PRIMARY KEY (`NIK`),
-  ADD UNIQUE KEY `NIK` (`NIK`),
   ADD KEY `id_user` (`id_user`),
   ADD KEY `golongan` (`golongan`);
 
@@ -217,13 +249,19 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT untuk tabel `tb_absensi`
 --
 ALTER TABLE `tb_absensi`
-  MODIFY `id_absensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_absensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_gaji`
 --
 ALTER TABLE `tb_gaji`
-  MODIFY `id_gaji` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_gaji` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `tb_golongan`
+--
+ALTER TABLE `tb_golongan`
+  MODIFY `id_golongan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_level`
@@ -235,7 +273,7 @@ ALTER TABLE `tb_level`
 -- AUTO_INCREMENT untuk tabel `tb_tunjangan`
 --
 ALTER TABLE `tb_tunjangan`
-  MODIFY `id_tunjangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_tunjangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_user`
@@ -257,8 +295,7 @@ ALTER TABLE `tb_absensi`
 -- Ketidakleluasaan untuk tabel `tb_gaji`
 --
 ALTER TABLE `tb_gaji`
-  ADD CONSTRAINT `tb_gaji_ibfk_1` FOREIGN KEY (`NIK`) REFERENCES `tb_karyawan` (`NIK`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tb_gaji_ibfk_2` FOREIGN KEY (`tunjangan`) REFERENCES `tb_tunjangan` (`id_tunjangan`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tb_gaji_ibfk_1` FOREIGN KEY (`NIK`) REFERENCES `tb_karyawan` (`NIK`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `tb_user`

@@ -37,10 +37,6 @@ class AbsensiController extends Controller
     public function uploadFile(Request $request){
         try {
             //code...
-            $this->validate($request, [
-                'file' => 'required|mimes:xls,xlxs'
-            ]);
-    
             if ($request->hasFile('file')) {
                 $file = $request->file('file'); //GET FILE
                 Excel::import(new AbsensiImport, $file); //IMPORT FILE 
@@ -53,6 +49,10 @@ class AbsensiController extends Controller
             //throw $th;
             return redirect('/absensi')->with('msg_error', 'Gagal import data!');
         }
+
+        // $this->validate($request, [
+        //     'file' => 'required|mimes:xls,xlxs'
+        // ]);
     }
 
     public function store(Request $request){

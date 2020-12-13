@@ -16,7 +16,7 @@ class AbsensiImport implements ToModel
     public function model(array $row)
     {
         return new AbsensiModel([
-            'NIK'               => $row[0],
+            'NIK'               => str_replace("'","", $row[0]),
             'status_kehadiran'  => $row[1],
             'tanggal'           => $row[2] == '' ? null : Carbon::parse(str_replace("'", "", $row[2]))->format('Y-m-d'),
             'masuk'             => $row[3] == '' ? '00:00:00' : str_replace("'", "", $row[3]),
