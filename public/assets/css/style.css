@@ -167,3 +167,9 @@
     padding: 3px;
 }
 /* End */
+
+/* Sweetalert Custom Style */
+.swal-modal .swal-text {
+    text-align: center;
+}
+/* End */
