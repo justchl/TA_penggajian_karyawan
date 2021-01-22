@@ -270,8 +270,6 @@
                         var get30Days = moment(date).add(30, 'days').format('YYYY-MM-DD');
                         var now       = moment().format('YYYY-MM-DD');
 
-                        console.log(get30Days);
-
                         if(get30Days > now){
                             $('form').trigger('reset');
 

@@ -257,14 +257,41 @@
                     url : '/get-karyawan/'+value,
                     success : function(res){
                         var data = res.data;
+                        var tunjangan = res.tunjangan;
                         
-                        $('#label_nik').html(data[0].NIK);
-                        $('#label_nama').html(data[0].nama_karyawan);
-                        $('#label_golongan').html(data[0].golongan);
-                        $('#label_gender').html(data[0].jenis_kelamin);
-                        $('#label_jabatan').html(data[0].jabatan);
+                        var date      = moment(data[0].created_at).format('YYYY-MM-DD');
+                        var get30Days = moment(date).add(30, 'days').format('YYYY-MM-DD');
+                        var now       = moment().format('YYYY-MM-DD');
 
-                        calculateGaji();
+                        console.log(get30Days);
+
+                        if(get30Days > now){
+                            $('form').trigger('reset');
+
+                            $('#datepickerGaji').datepicker({
+                                autoclose: true,
+                                todayHighlight : true,
+                            }).datepicker("update", new Date());
+
+                            swal({
+                                title: "Perhatian!",
+                                text: "Karyawan yang bersangkutan, belum menjalani masa kerja selama 30 hari!",
+                                icon: "warning",
+                            });
+
+                        }else{
+                            $('#label_nik').html(data[0].NIK);
+                            $('#label_nama').html(data[0].nama_karyawan);
+                            $('#label_golongan').html(data[0].nama_golongan);
+                            $('#label_gender').html(data[0].jenis_kelamin);
+                            $('#label_jabatan').html(data[0].jabatan);
+                            $('#gaji_pokok').val(data[0].nilai);
+                            $('#t_makan').val(tunjangan[0].nilai_tunjangan)
+                            $('#t_pendidikan').val(tunjangan[1].nilai_tunjangan)
+                            $('#t_jabatan').val(tunjangan[2].nilai_tunjangan)
+                            
+                            calculateGaji();
+                        }
                     }
                 })
             });
